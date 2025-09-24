@@ -27,22 +27,7 @@ export interface UserAccount {
     plan: 'free' | 'pro' | 'team';
     status: 'active' | 'inactive' | 'trial';
     expiresAt?: Date;
-export interface ExportData {
-  user: UserAccount | null;
-  tasks: UserTask[];
-  projects: UserProject[];
-  exportedAt: string;
-  version: string;
-}
-
-export interface UserAnalytics {
-  totalTasks: number;
-  completedTasks: number;
-  overdueTasks: number;
-  completionRate: number;
-  tasksByStatus: Record<string, number>;
-  tasksByPriority: Record<string, number>;
-  lastUpdated: Date;
+  };
 }
 
 export interface UserSession {
@@ -414,7 +399,7 @@ class DatabaseService {
   }
 
   // Data Export/Import
-  async exportUserData(userId: string): Promise<any> {
+  async exportUserData(userId: string): Promise<ExportData> {
     const user = await this.getUserById(userId);
     const tasks = await this.getUserTasks(userId);
     const projects = await this.getUserProjects(userId);
@@ -428,14 +413,14 @@ class DatabaseService {
     };
   }
 
-  async importUserData(userId: string, data: any): Promise<void> {
+  async importUserData(userId: string, data: ExportData): Promise<void> {
     // This would handle importing previously exported data
     // Implementation would validate and merge the data
     console.log('Importing data for user:', userId, data);
   }
 
   // Analytics
-  async getUserAnalytics(userId: string): Promise<any> {
+  async getUserAnalytics(userId: string): Promise<UserAnalytics> {
     const tasks = await this.getUserTasks(userId);
     
     const totalTasks = tasks.length;

@@ -88,9 +88,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const deliveryPrice = currentDelivery ? currentDelivery.price : 0;
   
   const totalPrice = (basePrice * quantity) + deliveryPrice;
-  const totalOriginalPrice = (baseOriginalPrice * quantity) + deliveryPrice;
   const totalPricePhp = Math.round(totalPrice * 56.5);
-  const totalOriginalPricePhp = Math.round(totalOriginalPrice * 56.5);
 
   const handleBuyNow = () => {
     setShowPaymentModal(true);

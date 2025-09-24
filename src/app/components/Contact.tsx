@@ -45,7 +45,6 @@ export default function Contact() {
   });
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -54,9 +53,8 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = () => {
     setIsSubmitting(true);
-    setSubmitStatus('idle');
     
     // The form will submit automatically to FormSubmit
     // We just show loading state briefly

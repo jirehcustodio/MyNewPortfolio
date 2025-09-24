@@ -150,7 +150,7 @@ export default function BlogPage() {
           animate={isInView ? "visible" : "hidden"}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {filteredArticles.map((article, index) => (
+          {filteredArticles.map((article) => (
             <motion.article
               key={article.id}
               variants={itemVariants}
