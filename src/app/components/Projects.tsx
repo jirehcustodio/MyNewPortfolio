@@ -150,7 +150,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="relative py-20 lg:py-32 overflow-hidden">
+    <section id="projects" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800/50 to-neutral-900" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] opacity-60" />
@@ -161,19 +161,19 @@ export default function Projects() {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-sm font-medium mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm"
           >
             <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
             Recent Work
           </motion.div>
           
-          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
             <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
               Featured Projects
             </span>
@@ -183,7 +183,7 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-lg sm:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2"
           >
             A showcase of my recent work, featuring modern web applications 
             built with cutting-edge technologies and thoughtful user experiences.
@@ -195,18 +195,18 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
         >
           {categories.map((category) => (
             <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-sm ${
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-sm text-sm sm:text-base touch-manipulation ${
                 selectedCategory === category
                   ? 'bg-blue-500 text-white border border-blue-400'
-                  : 'bg-neutral-800/50 text-neutral-300 border border-neutral-700/50 hover:border-blue-400/50 hover:text-blue-400'
+                  : 'bg-neutral-800/50 text-neutral-300 border border-neutral-700/50 hover:border-blue-400/50 hover:text-blue-400 active:bg-neutral-700/50'
               }`}
             >
               {category}
@@ -219,7 +219,7 @@ export default function Projects() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
           <AnimatePresence>
             {filteredProjects.map((project, i) => (
@@ -233,13 +233,14 @@ export default function Projects() {
               >
                 {/* Project Card */}
                 <motion.div
-                  className="relative h-full bg-neutral-800/50 backdrop-blur-sm border border-neutral-700/50 rounded-3xl overflow-hidden cursor-pointer"
+                  className="relative h-full bg-neutral-800/50 backdrop-blur-sm border border-neutral-700/50 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer touch-manipulation"
                   whileHover={{ 
-                    y: -12,
-                    rotateY: 5,
-                    rotateX: 5,
+                    y: -8,
+                    rotateY: 2,
+                    rotateX: 2,
                     transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
+                  whileTap={{ scale: 0.98 }}
                   style={{
                     transformStyle: "preserve-3d",
                     boxShadow: hoveredProject === i 
@@ -250,7 +251,7 @@ export default function Projects() {
                 >
                   {/* Gradient Header */}
                   <motion.div
-                    className={`h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}
+                    className={`h-40 sm:h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}
                     initial={{ scale: 1 }}
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.4 }}
@@ -261,16 +262,17 @@ export default function Projects() {
                         initial={{ scale: 0, rotate: -12 }}
                         animate={{ scale: 1, rotate: -12 }}
                         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                        className="absolute top-4 left-4 px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full backdrop-blur-sm border border-green-400/50 flex items-center gap-1"
+                        className="absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full backdrop-blur-sm border border-green-400/50 flex items-center gap-1"
                       >
-                        <FaPlay className="w-3 h-3" />
-                        LIVE DEMO
+                        <FaPlay className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                        <span className="hidden sm:inline">LIVE DEMO</span>
+                        <span className="sm:hidden">LIVE</span>
                       </motion.div>
                     )}
                     
                     {/* Category Badge */}
                     <motion.div
-                      className="absolute top-4 right-4 px-3 py-1 bg-black/20 text-white text-xs font-medium rounded-full backdrop-blur-sm"
+                      className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2 sm:px-3 py-1 bg-black/20 text-white text-xs font-medium rounded-full backdrop-blur-sm"
                     >
                       {project.category}
                     </motion.div>
@@ -305,16 +307,16 @@ export default function Projects() {
                   </motion.div>
 
                   {/* Content */}
-                  <div className="p-6 lg:p-8">
+                  <div className="p-4 sm:p-6 lg:p-8">
                     <motion.h4
-                      className="text-xl lg:text-2xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors duration-300"
+                      className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-white group-hover:text-blue-400 transition-colors duration-300"
                       layoutId={`title-${project.id}`}
                     >
                       {project.title}
                     </motion.h4>
                     
                     <motion.p
-                      className="text-neutral-400 text-base lg:text-lg leading-relaxed mb-6"
+                      className="text-neutral-400 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6"
                       animate={{ 
                         color: hoveredProject === i ? "#e5e7eb" : "#a3a3a3" 
                       }}
@@ -324,7 +326,7 @@ export default function Projects() {
                     </motion.p>
 
                     {/* Tech Stack with Icons */}
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                       {project.tech.map((tech, techIndex) => {
                         const IconComponent = techIcons[tech];
                         return (
@@ -333,34 +335,35 @@ export default function Projects() {
                             initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.1 * techIndex, duration: 0.3 }}
-                            className="flex items-center gap-1 px-3 py-1 bg-neutral-700/50 border border-neutral-600/50 rounded-full text-xs font-medium text-neutral-300 backdrop-blur-sm"
+                            className="flex items-center gap-1 px-2 sm:px-3 py-1 bg-neutral-700/50 border border-neutral-600/50 rounded-full text-xs font-medium text-neutral-300 backdrop-blur-sm"
                             whileHover={{ 
-                              scale: 1.05,
+                              scale: 1.02,
                               backgroundColor: "rgba(59, 130, 246, 0.1)",
                               borderColor: "rgba(59, 130, 246, 0.3)",
                               color: "#60a5fa"
                             }}
                           >
-                            {IconComponent && <IconComponent className="w-3 h-3" />}
-                            {tech}
+                            {IconComponent && <IconComponent className="w-2.5 h-2.5 sm:w-3 sm:h-3" />}
+                            <span className="truncate">{tech}</span>
                           </motion.span>
                         );
                       })}
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-3">
+                    <div className="flex gap-2 sm:gap-3">
                       <motion.button
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedProject(project);
                         }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex-1 py-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 font-medium hover:bg-blue-500/20 transition-colors backdrop-blur-sm text-center flex items-center justify-center gap-2"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex-1 py-2.5 sm:py-3 bg-blue-500/10 border border-blue-500/20 rounded-lg sm:rounded-xl text-blue-400 font-medium hover:bg-blue-500/20 transition-colors backdrop-blur-sm text-center flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base touch-manipulation"
                       >
-                        <FaExternalLinkAlt className="w-3 h-3" />
-                        View Details
+                        <FaExternalLinkAlt className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                        <span className="hidden sm:inline">View Details</span>
+                        <span className="sm:hidden">Details</span>
                       </motion.button>
                       <motion.button
                         onClick={(e) => {
@@ -368,11 +371,11 @@ export default function Projects() {
                           e.stopPropagation();
                           window.open(project.githubLink, "_blank", "noopener,noreferrer");
                         }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex-1 py-3 bg-neutral-700/50 border border-neutral-600/50 rounded-xl text-neutral-300 font-medium hover:bg-neutral-600/50 transition-colors backdrop-blur-sm flex items-center justify-center gap-2"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="flex-1 py-2.5 sm:py-3 bg-neutral-700/50 border border-neutral-600/50 rounded-lg sm:rounded-xl text-neutral-300 font-medium hover:bg-neutral-600/50 transition-colors backdrop-blur-sm flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base touch-manipulation"
                       >
-                        <FaGithub className="w-3 h-3" />
+                        <FaGithub className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         Code
                       </motion.button>
                     </div>
@@ -408,32 +411,32 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4"
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                className="bg-neutral-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                className="bg-neutral-800 rounded-2xl sm:rounded-3xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Modal Header */}
-                <div className={`h-64 bg-gradient-to-br ${selectedProject.gradient} relative overflow-hidden rounded-t-3xl`}>
+                <div className={`h-48 sm:h-64 bg-gradient-to-br ${selectedProject.gradient} relative overflow-hidden rounded-t-2xl sm:rounded-t-3xl`}>
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="absolute top-6 right-6 w-10 h-10 bg-black/20 rounded-full flex items-center justify-center text-white hover:bg-black/40 transition-colors"
+                    className="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 bg-black/20 rounded-full flex items-center justify-center text-white hover:bg-black/40 transition-colors touch-manipulation"
                   >
-                    <FaTimes className="w-4 h-4" />
+                    <FaTimes className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
-                  <div className="absolute bottom-6 left-6">
-                    <h2 className="text-3xl font-bold text-white mb-2">{selectedProject.title}</h2>
-                    <p className="text-white/80">{selectedProject.category}</p>
+                  <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-12 sm:right-16">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">{selectedProject.title}</h2>
+                    <p className="text-white/80 text-sm sm:text-base">{selectedProject.category}</p>
                   </div>
                 </div>
 
                 {/* Modal Content */}
-                <div className="p-8">
+                <div className="p-4 sm:p-6 lg:p-8">
                   <p className="text-neutral-300 text-lg leading-relaxed mb-8">
                     {selectedProject.longDesc}
                   </p>

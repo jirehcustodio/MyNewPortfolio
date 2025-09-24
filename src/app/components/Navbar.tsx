@@ -66,7 +66,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -75,7 +75,7 @@ export default function Navbar() {
             onClick={() => handleNavClick('#hero')}
           >
             <motion.h1 
-              className="text-xl lg:text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+              className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
               animate={{
                 backgroundPosition: ["0%", "100%", "0%"]
               }}
@@ -175,7 +175,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-neutral-800/50 border border-neutral-700/50 backdrop-blur-sm"
+            className="md:hidden p-2.5 rounded-lg bg-neutral-800/50 border border-neutral-700/50 backdrop-blur-sm touch-manipulation active:bg-neutral-700/50"
           >
             <motion.div
               animate={isMobileMenuOpen ? "open" : "closed"}
@@ -230,7 +230,7 @@ export default function Navbar() {
           }}
           className="md:hidden overflow-hidden bg-neutral-900/95 backdrop-blur-md border-t border-neutral-800/50"
         >
-          <div className="py-6 space-y-2">
+          <div className="py-4 sm:py-6 space-y-1 sm:space-y-2">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
@@ -252,10 +252,10 @@ export default function Navbar() {
                     opacity: 0
                   }
                 }}
-                className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ${
+                className={`block px-4 py-3 rounded-lg sm:rounded-xl text-base font-medium transition-all duration-300 touch-manipulation active:scale-95 ${
                   activeSection === item.href.slice(1)
                     ? "text-blue-400 bg-blue-500/10 border border-blue-500/20"
-                    : "text-neutral-300 hover:text-white hover:bg-neutral-800/50"
+                    : "text-neutral-300 hover:text-white hover:bg-neutral-800/50 active:bg-neutral-800/70"
                 }`}
                 whileTap={{ scale: 0.95 }}
               >
@@ -302,7 +302,7 @@ export default function Navbar() {
                   opacity: 0
                 }
               }}
-              className="block mx-4 mt-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl text-base font-semibold text-white text-center"
+              className="block mx-4 mt-3 sm:mt-4 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg sm:rounded-xl text-base font-semibold text-white text-center touch-manipulation active:scale-95"
               whileTap={{ scale: 0.95 }}
             >
 {t.hero.cta.contact}

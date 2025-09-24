@@ -95,33 +95,34 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-20"
+          className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center min-h-screen py-16 sm:py-20"
         >
           {/* Left Column - Text Content */}
           <motion.div 
             variants={itemVariants}
-            className="text-center lg:text-left space-y-6 lg:space-y-8"
+            className="text-center lg:text-left space-y-4 sm:space-y-6 lg:space-y-8"
           >
             {/* Greeting Badge */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs sm:text-sm font-medium backdrop-blur-sm"
             >
               <motion.span
                 animate={{ rotate: [0, 14, -8, 14, -4, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                className="text-lg"
+                className="text-base sm:text-lg"
               >
                 👋
               </motion.span>
-              Hello, I&apos;m available for work!
+              <span className="hidden sm:inline">Hello, I&apos;m available for work!</span>
+              <span className="sm:hidden">Available for work!</span>
             </motion.div>
 
             {/* Main Heading */}
-            <motion.div variants={itemVariants} className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+            <motion.div variants={itemVariants} className="space-y-2 sm:space-y-4">
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight px-2 lg:px-0">
                 <span className="text-white">Hi, I&apos;m </span>
                 <motion.span
                   className="relative inline-block"
@@ -143,7 +144,7 @@ export default function Hero() {
               {/* Subtitle with Typewriter Effect */}
               <motion.div
                 variants={itemVariants}
-                className="text-xl sm:text-2xl lg:text-3xl text-neutral-300 font-light"
+                className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-neutral-300 font-light"
               >
                 <motion.span
                   initial={{ width: 0 }}
@@ -160,7 +161,7 @@ export default function Hero() {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-lg sm:text-xl text-neutral-400 max-w-2xl leading-relaxed"
+              className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-2xl leading-relaxed px-2 lg:px-0"
             >
               I craft exceptional digital experiences through{" "}
               <motion.span
@@ -192,17 +193,17 @@ export default function Hero() {
             {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 px-2 lg:px-0"
             >
               <motion.a
                 href="#projects"
                 whileHover={{ 
-                  scale: 1.05, 
+                  scale: 1.02, 
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
                   y: -2
                 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl font-semibold text-white overflow-hidden transition-all duration-300"
+                whileTap={{ scale: 0.98 }}
+                className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl font-semibold text-white overflow-hidden transition-all duration-300 text-center text-sm sm:text-base touch-manipulation"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -221,13 +222,13 @@ export default function Hero() {
               <motion.a
                 href="#contact"
                 whileHover={{ 
-                  scale: 1.05, 
+                  scale: 1.02, 
                   borderColor: "#60a5fa",
                   y: -2,
                   boxShadow: "0 10px 30px rgba(59, 130, 246, 0.1)"
                 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 border-2 border-neutral-600 hover:border-blue-400 rounded-2xl font-semibold transition-all duration-300 backdrop-blur-sm bg-neutral-800/50"
+                whileTap={{ scale: 0.98 }}
+                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-neutral-600 hover:border-blue-400 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 backdrop-blur-sm bg-neutral-800/50 text-center text-sm sm:text-base touch-manipulation"
               >
                 Get In Touch
               </motion.a>
@@ -236,7 +237,7 @@ export default function Hero() {
             {/* Social Links */}
             <motion.div
               variants={itemVariants}
-              className="flex justify-center lg:justify-start gap-4 pt-6"
+              className="flex justify-center lg:justify-start gap-3 sm:gap-4 pt-4 sm:pt-6"
             >
               {[
                 { name: 'GitHub', icon: FaGithub, href: 'https://github.com/jirehcustodio' },
@@ -248,11 +249,11 @@ export default function Hero() {
                   href={social.href}
                   target={social.name !== 'Email' ? '_blank' : undefined}
                   rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-12 h-12 bg-neutral-800/50 border border-neutral-700 rounded-xl flex items-center justify-center hover:border-blue-400 transition-colors backdrop-blur-sm"
+                  className="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800/50 border border-neutral-700 rounded-lg sm:rounded-xl flex items-center justify-center hover:border-blue-400 transition-colors backdrop-blur-sm touch-manipulation"
                 >
-                  <social.icon className="w-5 h-5 text-neutral-400 hover:text-blue-400 transition-colors" />
+                  <social.icon className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 hover:text-blue-400 transition-colors" />
                 </motion.a>
               ))}
             </motion.div>
@@ -300,7 +301,7 @@ export default function Hero() {
 
               {/* Main Profile Container */}
               <motion.div
-                className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96"
+                className="relative w-64 h-64 xs:w-72 xs:h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto lg:mx-0"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
@@ -369,10 +370,10 @@ export default function Hero() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.5, duration: 0.6 }}
-                  className="absolute -bottom-6 left-1/2 transform -translate-x-1/2"
+                  className="absolute -bottom-4 sm:-bottom-6 left-1/2 transform -translate-x-1/2"
                 >
                   <motion.div
-                    className="bg-neutral-900/90 border border-neutral-700 rounded-2xl px-6 py-3 backdrop-blur-md"
+                    className="bg-neutral-900/90 border border-neutral-700 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md"
                     whileHover={{ 
                       scale: 1.05, 
                       borderColor: "#60a5fa",
@@ -382,9 +383,9 @@ export default function Hero() {
                       boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)"
                     }}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <motion.div
-                        className="w-3 h-3 bg-green-400 rounded-full"
+                        className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full"
                         animate={{ 
                           opacity: [1, 0.5, 1],
                           scale: [1, 1.2, 1]
@@ -394,7 +395,7 @@ export default function Hero() {
                           repeat: Infinity 
                         }}
                       />
-                      <span className="text-sm font-medium text-white">
+                      <span className="text-xs sm:text-sm font-medium text-white whitespace-nowrap">
                         Available for work
                       </span>
                     </div>

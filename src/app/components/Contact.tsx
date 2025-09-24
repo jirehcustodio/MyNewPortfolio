@@ -64,7 +64,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-20 lg:py-32 overflow-hidden">
+    <section id="contact" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)] opacity-60" />
@@ -75,19 +75,19 @@ export default function Contact() {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-pink-500/10 border border-pink-500/20 rounded-full text-pink-400 text-sm font-medium mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 bg-pink-500/10 border border-pink-500/20 rounded-full text-pink-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm"
           >
             <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
             Let&apos;s Connect
           </motion.div>
           
-          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
             <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
               Get In Touch
             </span>
@@ -97,30 +97,30 @@ export default function Contact() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-lg sm:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2"
           >
             Ready to bring your ideas to life? Let&apos;s collaborate and create something amazing together.
           </motion.p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 max-w-6xl mx-auto">
           {/* Left Column - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
             <div>
-              <h4 className="text-2xl font-bold text-white mb-6">Let&apos;s Start a Conversation</h4>
-              <p className="text-neutral-400 text-lg leading-relaxed mb-8">
+              <h4 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Let&apos;s Start a Conversation</h4>
+              <p className="text-neutral-400 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
                 I&apos;m always interested in new opportunities and exciting projects. 
                 Whether you have a question or just want to say hi, feel free to reach out!
               </p>
             </div>
 
             {/* Contact Methods */}
-            <div className="grid gap-4">
+            <div className="grid gap-3 sm:gap-4">
               {contactMethods.map((method, index) => (
                 <motion.a
                   key={method.title}
@@ -128,28 +128,29 @@ export default function Contact() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ delay: 0.5 + (index * 0.1), duration: 0.5 }}
-                  className="group relative p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-2xl backdrop-blur-sm overflow-hidden"
+                  className="group relative p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl backdrop-blur-sm overflow-hidden touch-manipulation"
                   whileHover={{ 
                     scale: 1.02,
                     borderColor: "rgba(59, 130, 246, 0.3)"
                   }}
+                  whileTap={{ scale: 0.98 }}
                   target={method.link.startsWith('http') ? '_blank' : undefined}
                   rel={method.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
-                  <div className="flex items-center gap-4 relative z-10">
+                  <div className="flex items-center gap-3 sm:gap-4 relative z-10">
                     <motion.div
-                      className={`w-12 h-12 bg-gradient-to-r ${method.color} rounded-xl flex items-center justify-center text-white font-bold`}
+                      className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${method.color} rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0`}
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <method.icon className="w-6 h-6" />
+                      <method.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </motion.div>
                     
-                    <div>
-                      <h5 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                    <div className="min-w-0 flex-1">
+                      <h5 className="font-semibold text-white group-hover:text-blue-400 transition-colors text-sm sm:text-base">
                         {method.title}
                       </h5>
-                      <p className="text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                      <p className="text-neutral-400 group-hover:text-neutral-300 transition-colors text-xs sm:text-sm truncate">
                         {method.value}
                       </p>
                     </div>
@@ -174,13 +175,13 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 1, duration: 0.6 }}
-              className="p-6 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-pink-500/10 border border-blue-500/20 rounded-2xl backdrop-blur-sm"
+              className="p-4 sm:p-6 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-pink-500/10 border border-blue-500/20 rounded-xl sm:rounded-2xl backdrop-blur-sm"
             >
-              <h5 className="font-semibold text-white mb-3 flex items-center gap-2">
+              <h5 className="font-semibold text-white mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
                 <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                 Quick Response Time
               </h5>
-              <p className="text-neutral-400 text-sm">
+              <p className="text-neutral-400 text-xs sm:text-sm">
                 I typically respond to messages within 24 hours. Looking forward to hearing from you!
               </p>
             </motion.div>
@@ -193,7 +194,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <motion.form
-              className="space-y-6 p-8 bg-neutral-800/30 border border-neutral-700/30 rounded-3xl backdrop-blur-sm"
+              className="space-y-4 sm:space-y-6 p-4 sm:p-6 lg:p-8 bg-neutral-800/30 border border-neutral-700/30 rounded-2xl sm:rounded-3xl backdrop-blur-sm"
               style={{
                 boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)"
               }}
@@ -222,9 +223,9 @@ export default function Contact() {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('name')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 backdrop-blur-sm"
+                  className="w-full p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 backdrop-blur-sm text-base"
                   whileFocus={{ 
-                    scale: 1.02,
+                    scale: 1.01,
                     borderColor: "#60a5fa",
                     boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)"
                   }}
@@ -253,9 +254,9 @@ export default function Contact() {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 backdrop-blur-sm"
+                  className="w-full p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 backdrop-blur-sm text-base"
                   whileFocus={{ 
-                    scale: 1.02,
+                    scale: 1.01,
                     borderColor: "#60a5fa",
                     boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)"
                   }}
@@ -279,14 +280,14 @@ export default function Contact() {
                   name="message"
                   placeholder="Your Message"
                   required
-                  rows={6}
+                  rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 resize-none backdrop-blur-sm"
+                  className="w-full p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 resize-none backdrop-blur-sm text-base"
                   whileFocus={{ 
-                    scale: 1.02,
+                    scale: 1.01,
                     borderColor: "#60a5fa",
                     boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)"
                   }}
@@ -310,11 +311,11 @@ export default function Contact() {
                   type="submit"
                   disabled={isSubmitting}
                   whileHover={{ 
-                    scale: isSubmitting ? 1 : 1.05,
+                    scale: isSubmitting ? 1 : 1.02,
                     boxShadow: isSubmitting ? undefined : "0 20px 40px rgba(59, 130, 246, 0.3)"
                   }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                  className={`group w-full px-8 py-4 rounded-2xl font-semibold text-white relative overflow-hidden transition-all duration-300 ${
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                  className={`group w-full px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white relative overflow-hidden transition-all duration-300 text-base touch-manipulation ${
                     isSubmitting 
                       ? 'bg-gradient-to-r from-blue-400 to-purple-500 cursor-not-allowed opacity-80' 
                       : 'bg-gradient-to-r from-blue-500 to-purple-600'
