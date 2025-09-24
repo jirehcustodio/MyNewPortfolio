@@ -177,7 +177,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
-Built with the assistance of AI tools and modern web development best practices. Special thanks to the open-source community for the amazing tools and libraries that made this portfolio possible.
+Built following modern web development best practices and industry standards. Special thanks to the incredible open-source community for creating and maintaining the amazing tools and libraries that power this portfolio. Grateful for the wealth of documentation, tutorials, and community contributions that helped bring this project to life.
 
 ---
 
