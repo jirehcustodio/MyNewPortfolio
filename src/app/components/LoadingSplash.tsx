@@ -94,12 +94,78 @@ export default function LoadingSplash({ onComplete }: LoadingSplashProps) {
     }
   };
 
+  // Function to play completion sound
+  const playCompletionSound = async () => {
+    try {
+      // Create a simple success sound using Web Audio API
+      const AudioContextClass = window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      
+      if (!AudioContextClass) {
+        console.log('AudioContext not supported');
+        return;
+      }
+
+      const audioContext = new AudioContextClass();
+      
+      // Check if audio context is suspended and try to resume it
+      if (audioContext.state === 'suspended') {
+        try {
+          await audioContext.resume();
+          console.log('Audio context resumed');
+        } catch (err) {
+          console.log('Failed to resume audio context:', err);
+          return;
+        }
+      }
+      
+      // Wait a moment for context to be ready
+      await new Promise(resolve => setTimeout(resolve, 10));
+      
+      // Create a sequence of pleasant tones
+      const tones = [
+        { frequency: 523.25, duration: 0.15 }, // C5
+        { frequency: 659.25, duration: 0.15 }, // E5  
+        { frequency: 783.99, duration: 0.3 }   // G5
+      ];
+
+      let currentTime = audioContext.currentTime + 0.01; // Small delay to ensure context is ready
+
+      tones.forEach(({ frequency, duration }) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(frequency, currentTime);
+        oscillator.type = 'sine';
+        
+        // Create a smooth envelope
+        gainNode.gain.setValueAtTime(0, currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.3, currentTime + 0.02);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, currentTime + duration);
+        
+        oscillator.start(currentTime);
+        oscillator.stop(currentTime + duration);
+        
+        currentTime += duration + 0.05; // Small gap between tones
+      });
+      
+      console.log('Completion sound played');
+    } catch (error) {
+      console.log('Audio playback failed:', error);
+    }
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
+            // Play completion sound
+            playCompletionSound();
+            
             controls.start("exit").then(() => {
               setTimeout(onComplete, 300);
             });
