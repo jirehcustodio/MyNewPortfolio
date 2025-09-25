@@ -205,8 +205,9 @@ export default function Contact() {
               {/* Hidden inputs for FormSubmit configuration */}
               <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission" />
               <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value={typeof window !== 'undefined' ? `${window.location.origin}/contact-success` : '/contact-success'} />
+              <input type="hidden" name="_next" value="https://jirehdevportfolio.netlify.app/contact-success" />
               <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_autoresponse" value="Thank you for contacting Jireh! Your message has been received and I will get back to you within 24 hours." />
               <input type="text" name="_honey" style={{ display: 'none' }} />
               {/* Name Field */}
               <motion.div
