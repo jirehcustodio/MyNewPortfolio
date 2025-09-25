@@ -44,7 +44,6 @@ export default function Contact() {
     message: ""
   });
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -53,15 +52,7 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = () => {
-    setIsSubmitting(true);
-    
-    // The form will submit automatically to FormSubmit
-    // We just show loading state briefly
-    setTimeout(() => {
-      setIsSubmitting(false);
-    }, 1000);
-  };
+
 
   return (
     <section id="contact" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden">
@@ -193,14 +184,13 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <motion.form
+            <form
               className="space-y-4 sm:space-y-6 p-4 sm:p-6 lg:p-8 bg-neutral-800/30 border border-neutral-700/30 rounded-2xl sm:rounded-3xl backdrop-blur-sm"
               style={{
                 boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)"
               }}
               action="https://formsubmit.co/jireh4401@gmail.com"
               method="POST"
-              onSubmit={handleSubmit}
             >
               {/* Hidden inputs for FormSubmit configuration */}
               <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission" />
@@ -310,58 +300,38 @@ export default function Contact() {
               >
                 <motion.button
                   type="submit"
-                  disabled={isSubmitting}
                   whileHover={{ 
-                    scale: isSubmitting ? 1 : 1.02,
-                    boxShadow: isSubmitting ? undefined : "0 20px 40px rgba(59, 130, 246, 0.3)"
+                    scale: 1.02,
+                    boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
                   }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                  className={`group w-full px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white relative overflow-hidden transition-all duration-300 text-base touch-manipulation ${
-                    isSubmitting 
-                      ? 'bg-gradient-to-r from-blue-400 to-purple-500 cursor-not-allowed opacity-80' 
-                      : 'bg-gradient-to-r from-blue-500 to-purple-600'
-                  }`}
+                  whileTap={{ scale: 0.98 }}
+                  className="group w-full px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white relative overflow-hidden transition-all duration-300 text-base touch-manipulation bg-gradient-to-r from-blue-500 to-purple-600"
                 >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    {isSubmitting ? (
-                      <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                        />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <motion.span
-                          animate={{ x: [0, 4, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          →
-                        </motion.span>
-                      </>
-                    )}
+                    Send Message
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
                   </span>
                   
                   {/* Ripple Effect */}
-                  {!isSubmitting && (
-                    <motion.div
-                      className="absolute inset-0 bg-white/10 rounded-2xl opacity-0"
-                      whileHover={{ 
-                        opacity: [0, 0.2, 0],
-                        scale: [1, 1.05, 1.02]
-                      }}
-                      transition={{ duration: 0.6 }}
-                    />
-                  )}
+                  <motion.div
+                    className="absolute inset-0 bg-white/10 rounded-2xl opacity-0"
+                    whileHover={{ 
+                      opacity: [0, 0.2, 0],
+                      scale: [1, 1.05, 1.02]
+                    }}
+                    transition={{ duration: 0.6 }}
+                  />
                 </motion.button>
               </motion.div>
-            </motion.form>
+            </form>
           </motion.div>
         </div>
       </div>
