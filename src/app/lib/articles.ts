@@ -1631,6 +1631,1624 @@ The investment in proper cloud security practices pays dividends in protecting y
     views: 3421,
     publishedAt: "2025-01-05T09:15:00Z",
     updatedAt: "2025-01-05T09:15:00Z"
+  },
+  {
+    id: 4,
+    title: "Optimizing Performance in Next.js Applications",
+    excerpt: "Advanced techniques for improving load times, SEO, and user experience in Next.js applications.",
+    content: `
+# Optimizing Performance in Next.js Applications
+
+Performance optimization is critical for modern web applications, affecting everything from user experience to search engine rankings. Next.js provides powerful built-in optimizations, but understanding how to leverage them effectively is key to building lightning-fast applications.
+
+## Introduction
+
+In today's competitive digital landscape, website performance directly impacts user engagement, conversion rates, and SEO rankings. Studies show that a 1-second delay in page load time can result in a 7% reduction in conversions. Next.js, with its focus on performance, provides numerous optimization strategies out of the box.
+
+## Core Web Vitals and Next.js
+
+### Understanding Core Web Vitals
+
+Google's Core Web Vitals consist of three key metrics:
+
+**1. Largest Contentful Paint (LCP)**
+- Measures loading performance
+- Should occur within 2.5 seconds of when the page first starts loading
+
+**2. First Input Delay (FID)**
+- Measures interactivity
+- Should be less than 100 milliseconds
+
+**3. Cumulative Layout Shift (CLS)**
+- Measures visual stability
+- Should maintain a score of less than 0.1
+
+### Implementing Performance Monitoring
+
+\`\`\`typescript
+// lib/performance.ts
+export function measureWebVitals(metric: any) {
+  switch (metric.name) {
+    case 'FCP':
+      console.log('First Contentful Paint:', metric.value);
+      break;
+    case 'LCP':
+      console.log('Largest Contentful Paint:', metric.value);
+      break;
+    case 'CLS':
+      console.log('Cumulative Layout Shift:', metric.value);
+      break;
+    case 'FID':
+      console.log('First Input Delay:', metric.value);
+      break;
+    case 'TTFB':
+      console.log('Time to First Byte:', metric.value);
+      break;
+  }
+  
+  // Send to analytics
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', metric.name, {
+      custom_map: { metric_id: 'web_vitals' },
+      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      event_category: 'Web Vitals',
+      event_label: metric.id,
+      non_interaction: true,
+    });
+  }
+}
+\`\`\`
+
+## Image Optimization Strategies
+
+### Next.js Image Component
+
+The Next.js Image component provides automatic optimization:
+
+\`\`\`typescript
+import Image from 'next/image';
+
+// Optimized image component
+export function OptimizedImage({ src, alt, priority = false }) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={800}
+      height={600}
+      priority={priority}
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyLli5GvuH467raEs7d0Tgs3I2vFfUWiRCMjUIjuxwwwKpyGuNe+q+gQYhG1bj6yK2jkaTXPHmGD6+"
+      className="rounded-lg shadow-md"
+      style={{
+        maxWidth: '100%',
+        height: 'auto',
+      }}
+    />
+  );
+}
+\`\`\`
+
+### Advanced Image Optimization
+
+\`\`\`typescript
+// next.config.js
+module.exports = {
+  images: {
+    domains: ['example.com', 'cdn.example.com'],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  // Enable compression
+  compress: true,
+  // Optimize bundle
+  swcMinify: true,
+};
+\`\`\`
+
+## Code Splitting and Dynamic Imports
+
+### Component-Level Code Splitting
+
+\`\`\`typescript
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+// Lazy load heavy components
+const HeavyChart = dynamic(() => import('../components/HeavyChart'), {
+  loading: () => <div>Loading chart...</div>,
+  ssr: false, // Disable SSR for client-only components
+});
+
+const HeavyModal = dynamic(() => import('../components/HeavyModal'), {
+  suspense: true,
+});
+
+export default function Dashboard() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      
+      {/* Load chart only when needed */}
+      <HeavyChart />
+      
+      {/* Suspense boundary for better loading experience */}
+      <Suspense fallback={<div>Loading modal...</div>}>
+        <HeavyModal />
+      </Suspense>
+    </div>
+  );
+}
+\`\`\`
+
+### Route-Based Code Splitting
+
+\`\`\`typescript
+// Automatic route-based splitting
+// pages/admin/index.tsx - Only loads when accessing /admin
+import { GetServerSideProps } from 'next';
+
+export default function AdminDashboard({ data }) {
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      {/* Heavy admin components */}
+    </div>
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Pre-load critical data
+  const data = await fetchAdminData();
+  
+  return {
+    props: { data },
+  };
+};
+\`\`\`
+
+## Caching Strategies
+
+### Static Generation with ISR
+
+\`\`\`typescript
+// Incremental Static Regeneration
+export async function getStaticProps() {
+  const posts = await fetchPosts();
+  
+  return {
+    props: { posts },
+    revalidate: 3600, // Regenerate every hour
+  };
+}
+
+export async function getStaticPaths() {
+  const paths = await getAllPostPaths();
+  
+  return {
+    paths,
+    fallback: 'blocking', // Generate missing pages on demand
+  };
+}
+\`\`\`
+
+### API Route Caching
+
+\`\`\`typescript
+// pages/api/posts/[id].ts
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get('id');
+  
+  const post = await fetchPost(id);
+  
+  return NextResponse.json(post, {
+    status: 200,
+    headers: {
+      'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+    },
+  });
+}
+\`\`\`
+
+## Bundle Optimization
+
+### Analyzing Bundle Size
+
+\`\`\`bash
+# Install bundle analyzer
+npm install --save-dev @next/bundle-analyzer
+
+# Analyze bundle
+ANALYZE=true npm run build
+\`\`\`
+
+\`\`\`javascript
+// next.config.js
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer({
+  // Your Next.js config
+});
+\`\`\`
+
+### Tree Shaking and Dead Code Elimination
+
+\`\`\`typescript
+// Import only what you need
+import { debounce } from 'lodash/debounce'; // ✅ Good
+import _ from 'lodash'; // ❌ Imports entire library
+
+// Use dynamic imports for large libraries
+async function loadChart() {
+  const { Chart } = await import('chart.js');
+  return Chart;
+}
+\`\`\`
+
+## Performance Monitoring in Production
+
+### Real User Monitoring
+
+\`\`\`typescript
+// lib/analytics.ts
+export function initPerformanceMonitoring() {
+  if (typeof window !== 'undefined') {
+    // Monitor Core Web Vitals
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(sendToAnalytics);
+      getFID(sendToAnalytics);
+      getFCP(sendToAnalytics);
+      getLCP(sendToAnalytics);
+      getTTFB(sendToAnalytics);
+    });
+  }
+}
+
+function sendToAnalytics({ name, value, id }) {
+  // Send to your analytics service
+  if (process.env.NODE_ENV === 'production') {
+    fetch('/api/analytics', {
+      method: 'POST',
+      body: JSON.stringify({
+        metric: name,
+        value: value,
+        id: id,
+        timestamp: Date.now(),
+      }),
+    });
+  }
+}
+\`\`\`
+
+### Performance Budget
+
+\`\`\`javascript
+// lighthouse.config.js
+module.exports = {
+  ci: {
+    collect: {
+      staticDistDir: './out',
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['error', { minScore: 0.9 }],
+        'categories:accessibility': ['error', { minScore: 0.9 }],
+        'categories:best-practices': ['error', { minScore: 0.9 }],
+        'categories:seo': ['error', { minScore: 0.9 }],
+      },
+    },
+  },
+};
+\`\`\`
+
+## Advanced Optimization Techniques
+
+### Service Workers for Caching
+
+\`\`\`typescript
+// public/sw.js
+const CACHE_NAME = 'app-cache-v1';
+const urlsToCache = [
+  '/',
+  '/static/js/bundle.js',
+  '/static/css/main.css',
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(urlsToCache))
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        return response || fetch(event.request);
+      })
+  );
+});
+\`\`\`
+
+### Edge Computing with Vercel Edge Functions
+
+\`\`\`typescript
+// pages/api/edge/personalization.ts
+import { NextRequest, NextResponse } from 'next/server';
+
+export const config = {
+  runtime: 'edge',
+};
+
+export default function handler(request: NextRequest) {
+  const country = request.geo?.country || 'US';
+  const city = request.geo?.city || 'Unknown';
+  
+  return NextResponse.json({
+    message: \`Hello from \${city}, \${country}!\`,
+    timestamp: new Date().toISOString(),
+  });
+}
+\`\`\`
+
+## Conclusion
+
+Performance optimization in Next.js is an ongoing process that requires attention to multiple areas: from image optimization and code splitting to caching strategies and real-time monitoring. The key is to:
+
+1. **Measure first** - Use tools like Lighthouse and Core Web Vitals
+2. **Optimize systematically** - Focus on the biggest impact areas
+3. **Monitor continuously** - Track performance in production
+4. **Stay updated** - Keep up with Next.js performance improvements
+
+By implementing these strategies, you can create Next.js applications that deliver exceptional user experiences while maintaining excellent search engine rankings and conversion rates.
+
+## Additional Resources
+
+- [Next.js Performance Documentation](https://nextjs.org/docs/basic-features/performance)
+- [Web.dev Performance Guide](https://web.dev/performance/)
+- [Core Web Vitals](https://web.dev/vitals/)
+- [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
+- [Bundle Analyzer Documentation](https://www.npmjs.com/package/@next/bundle-analyzer)
+`,
+    author: "Jireh Custodio",
+    authorBio: "Computer Engineering graduate and Full-Stack Developer specializing in cloud computing, cybersecurity, and modern web technologies. Currently working as IT Support Engineer at LGU Naga City.",
+    authorImage: "/authors/jireh-custodio.jpg",
+    date: "2024-12-28",
+    readTime: "12 min read",
+    category: "Performance",
+    tags: ["Next.js", "Performance", "Optimization", "Web Vitals", "Caching"],
+    image: "/blog/nextjs-performance-hero.jpg",
+    featured: false,
+    likes: 94,
+    views: 2156,
+    publishedAt: "2024-12-28T10:00:00Z",
+    updatedAt: "2024-12-28T10:00:00Z"
+  },
+  {
+    id: 5,
+    title: "Database Design Patterns for Scalable Applications",
+    excerpt: "Comprehensive guide to database design patterns, normalization strategies, and performance optimization techniques.",
+    content: `
+# Database Design Patterns for Scalable Applications
+
+Effective database design is the foundation of any scalable application. Poor database architecture can become a bottleneck that limits your application's growth and performance. This comprehensive guide explores proven patterns and strategies for designing databases that scale.
+
+## Introduction
+
+As applications grow from handling hundreds to millions of users, the database often becomes the first bottleneck. Understanding database design patterns, normalization strategies, and optimization techniques is crucial for building systems that can handle increasing load while maintaining performance and data integrity.
+
+## Fundamental Design Principles
+
+### ACID Properties
+
+Understanding ACID properties is essential for reliable database design:
+
+**Atomicity**: Each transaction is all-or-nothing
+**Consistency**: Database remains in a valid state
+**Isolation**: Concurrent transactions don't interfere
+**Durability**: Committed changes are permanent
+
+\`\`\`sql
+-- Example of an atomic transaction
+BEGIN TRANSACTION;
+  UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+  UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+  INSERT INTO transactions (from_account, to_account, amount) 
+  VALUES (1, 2, 100);
+COMMIT;
+\`\`\`
+
+### Normalization vs. Denormalization
+
+#### Third Normal Form (3NF)
+
+\`\`\`sql
+-- Normalized design (3NF)
+CREATE TABLE customers (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  customer_id INTEGER REFERENCES customers(id),
+  order_date TIMESTAMP DEFAULT NOW(),
+  total_amount DECIMAL(10,2)
+);
+
+CREATE TABLE order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER REFERENCES orders(id),
+  product_id INTEGER REFERENCES products(id),
+  quantity INTEGER NOT NULL,
+  unit_price DECIMAL(10,2)
+);
+\`\`\`
+
+#### Strategic Denormalization
+
+\`\`\`sql
+-- Denormalized for read performance
+CREATE TABLE order_summary (
+  id SERIAL PRIMARY KEY,
+  customer_id INTEGER,
+  customer_name VARCHAR(100),
+  customer_email VARCHAR(100),
+  order_date TIMESTAMP,
+  total_amount DECIMAL(10,2),
+  item_count INTEGER,
+  -- Denormalized fields for faster queries
+  last_order_date TIMESTAMP,
+  total_lifetime_value DECIMAL(12,2)
+);
+\`\`\`
+
+## Advanced Design Patterns
+
+### Repository Pattern
+
+\`\`\`typescript
+// TypeScript implementation
+interface UserRepository {
+  findById(id: string): Promise<User | null>;
+  findByEmail(email: string): Promise<User | null>;
+  create(user: CreateUserInput): Promise<User>;
+  update(id: string, data: UpdateUserInput): Promise<User>;
+  delete(id: string): Promise<void>;
+}
+
+class PostgresUserRepository implements UserRepository {
+  constructor(private db: Database) {}
+
+  async findById(id: string): Promise<User | null> {
+    const result = await this.db.query(
+      'SELECT * FROM users WHERE id = $1',
+      [id]
+    );
+    return result.rows[0] || null;
+  }
+
+  async create(user: CreateUserInput): Promise<User> {
+    const result = await this.db.query(
+      \`INSERT INTO users (name, email, password_hash) 
+       VALUES ($1, $2, $3) 
+       RETURNING *\`,
+      [user.name, user.email, user.passwordHash]
+    );
+    return result.rows[0];
+  }
+}
+\`\`\`
+
+### Unit of Work Pattern
+
+\`\`\`typescript
+class UnitOfWork {
+  private newEntities: Set<Entity> = new Set();
+  private dirtyEntities: Set<Entity> = new Set();
+  private removedEntities: Set<Entity> = new Set();
+
+  registerNew(entity: Entity): void {
+    this.newEntities.add(entity);
+  }
+
+  registerDirty(entity: Entity): void {
+    this.dirtyEntities.add(entity);
+  }
+
+  registerRemoved(entity: Entity): void {
+    this.removedEntities.add(entity);
+  }
+
+  async commit(): Promise<void> {
+    const transaction = await this.db.beginTransaction();
+    
+    try {
+      // Insert new entities
+      for (const entity of this.newEntities) {
+        await this.insertEntity(entity, transaction);
+      }
+      
+      // Update dirty entities
+      for (const entity of this.dirtyEntities) {
+        await this.updateEntity(entity, transaction);
+      }
+      
+      // Remove entities
+      for (const entity of this.removedEntities) {
+        await this.deleteEntity(entity, transaction);
+      }
+      
+      await transaction.commit();
+      this.clearChanges();
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
+  }
+}
+\`\`\`
+
+## Scaling Patterns
+
+### Read Replicas
+
+\`\`\`typescript
+class DatabaseManager {
+  constructor(
+    private masterDb: Database,
+    private readReplicas: Database[]
+  ) {}
+
+  async executeWrite(query: string, params: any[]): Promise<any> {
+    return this.masterDb.query(query, params);
+  }
+
+  async executeRead(query: string, params: any[]): Promise<any> {
+    // Load balance across read replicas
+    const replica = this.getRandomReplica();
+    return replica.query(query, params);
+  }
+
+  private getRandomReplica(): Database {
+    const index = Math.floor(Math.random() * this.readReplicas.length);
+    return this.readReplicas[index];
+  }
+}
+\`\`\`
+
+### Database Sharding
+
+\`\`\`typescript
+interface ShardStrategy {
+  getShard(key: string): string;
+}
+
+class HashShardStrategy implements ShardStrategy {
+  constructor(private shardCount: number) {}
+
+  getShard(key: string): string {
+    const hash = this.hashFunction(key);
+    const shardIndex = hash % this.shardCount;
+    return \`shard_\${shardIndex}\`;
+  }
+
+  private hashFunction(key: string): number {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      const char = key.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+  }
+}
+
+class ShardedDatabase {
+  constructor(
+    private shards: Map<string, Database>,
+    private strategy: ShardStrategy
+  ) {}
+
+  async query(shardKey: string, sql: string, params: any[]): Promise<any> {
+    const shardName = this.strategy.getShard(shardKey);
+    const shard = this.shards.get(shardName);
+    
+    if (!shard) {
+      throw new Error(\`Shard \${shardName} not found\`);
+    }
+    
+    return shard.query(sql, params);
+  }
+}
+\`\`\`
+
+### CQRS (Command Query Responsibility Segregation)
+
+\`\`\`typescript
+// Command side - optimized for writes
+class UserCommandHandler {
+  constructor(private writeDb: Database) {}
+
+  async createUser(command: CreateUserCommand): Promise<void> {
+    await this.writeDb.query(
+      'INSERT INTO users (id, name, email) VALUES ($1, $2, $3)',
+      [command.id, command.name, command.email]
+    );
+    
+    // Publish event for read model update
+    await this.eventBus.publish(new UserCreatedEvent(command));
+  }
+}
+
+// Query side - optimized for reads
+class UserQueryHandler {
+  constructor(private readDb: Database) {}
+
+  async getUserProfile(userId: string): Promise<UserProfile> {
+    return this.readDb.query(
+      \`SELECT u.*, p.bio, p.avatar_url, 
+              COUNT(o.id) as order_count,
+              SUM(o.total) as lifetime_value
+       FROM user_profiles u
+       LEFT JOIN profiles p ON u.id = p.user_id
+       LEFT JOIN orders o ON u.id = o.user_id
+       WHERE u.id = $1
+       GROUP BY u.id, p.bio, p.avatar_url\`,
+      [userId]
+    );
+  }
+}
+\`\`\`
+
+## Performance Optimization
+
+### Indexing Strategies
+
+\`\`\`sql
+-- Composite index for common query patterns
+CREATE INDEX idx_orders_customer_date 
+ON orders (customer_id, order_date DESC);
+
+-- Partial index for active records only
+CREATE INDEX idx_active_users 
+ON users (email) 
+WHERE active = true;
+
+-- Functional index for case-insensitive searches
+CREATE INDEX idx_users_email_lower 
+ON users (LOWER(email));
+
+-- Covering index to avoid table lookups
+CREATE INDEX idx_orders_covering 
+ON orders (customer_id) 
+INCLUDE (order_date, total_amount);
+\`\`\`
+
+### Query Optimization
+
+\`\`\`sql
+-- Efficient pagination with cursor-based approach
+SELECT * FROM posts 
+WHERE created_at < $1 
+ORDER BY created_at DESC 
+LIMIT 20;
+
+-- Avoid N+1 queries with JOINs
+SELECT p.*, c.name as category_name
+FROM posts p
+JOIN categories c ON p.category_id = c.id
+WHERE p.published = true;
+
+-- Use EXISTS instead of IN for large datasets
+SELECT * FROM users u
+WHERE EXISTS (
+  SELECT 1 FROM orders o 
+  WHERE o.user_id = u.id 
+  AND o.created_at > NOW() - INTERVAL '30 days'
+);
+\`\`\`
+
+### Connection Pooling
+
+\`\`\`typescript
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: parseInt(process.env.DB_PORT || '5432'),
+  max: 20, // Maximum number of connections
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
+
+class DatabaseService {
+  async query(text: string, params?: any[]): Promise<any> {
+    const client = await pool.connect();
+    try {
+      const result = await client.query(text, params);
+      return result;
+    } finally {
+      client.release();
+    }
+  }
+}
+\`\`\`
+
+## Monitoring and Maintenance
+
+### Query Performance Monitoring
+
+\`\`\`sql
+-- PostgreSQL: Enable query logging
+SET log_min_duration_statement = 1000; -- Log queries > 1 second
+
+-- Find slow queries
+SELECT query, calls, total_time, mean_time
+FROM pg_stat_statements
+ORDER BY total_time DESC
+LIMIT 10;
+
+-- Index usage statistics
+SELECT schemaname, tablename, indexname, idx_scan, idx_tup_read
+FROM pg_stat_user_indexes
+ORDER BY idx_scan ASC;
+\`\`\`
+
+### Automated Health Checks
+
+\`\`\`typescript
+class DatabaseHealthChecker {
+  async checkHealth(): Promise<HealthStatus> {
+    const checks = await Promise.allSettled([
+      this.checkConnection(),
+      this.checkReplicationLag(),
+      this.checkDiskSpace(),
+      this.checkSlowQueries(),
+    ]);
+
+    return {
+      healthy: checks.every(check => check.status === 'fulfilled'),
+      checks: checks.map((check, index) => ({
+        name: ['connection', 'replication', 'disk', 'queries'][index],
+        status: check.status,
+        details: check.status === 'fulfilled' ? check.value : check.reason,
+      })),
+    };
+  }
+
+  private async checkReplicationLag(): Promise<number> {
+    const result = await this.db.query(
+      'SELECT EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp()))::int as lag'
+    );
+    return result.rows[0].lag;
+  }
+}
+\`\`\`
+
+## Best Practices Summary
+
+### Data Modeling
+- **Start with normalized design** and denormalize strategically
+- **Use appropriate data types** to save space and improve performance
+- **Implement proper constraints** to maintain data integrity
+- **Design for your query patterns**, not just data relationships
+
+### Performance
+- **Index wisely** - balance query performance with write overhead
+- **Monitor query performance** and optimize bottlenecks
+- **Use connection pooling** to manage database connections efficiently
+- **Implement caching** at multiple levels (query, application, CDN)
+
+### Scalability
+- **Plan for growth** from the beginning
+- **Use read replicas** to scale read operations
+- **Consider sharding** for massive scale requirements
+- **Implement CQRS** for complex read/write patterns
+
+### Security
+- **Use parameterized queries** to prevent SQL injection
+- **Implement proper authentication and authorization**
+- **Encrypt sensitive data** both at rest and in transit
+- **Regular security audits** and updates
+
+## Conclusion
+
+Database design for scalable applications requires careful planning, understanding of access patterns, and continuous optimization. The patterns and techniques covered in this guide provide a solid foundation for building databases that can grow with your application.
+
+Remember that scalability is not just about handling more data—it's about maintaining performance, ensuring reliability, and keeping complexity manageable as your system grows.
+
+## Additional Resources
+
+- [PostgreSQL Performance Tuning](https://wiki.postgresql.org/wiki/Performance_Optimization)
+- [MySQL High Availability](https://dev.mysql.com/doc/mysql-ha-scalability/en/)
+- [Database Design Patterns](https://martinfowler.com/articles/patterns-of-distributed-systems/)
+- [CQRS Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+- [Sharding Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/sharding)
+`,
+    author: "Jireh Custodio",
+    authorBio: "Computer Engineering graduate and Full-Stack Developer specializing in cloud computing, cybersecurity, and modern web technologies. Currently working as IT Support Engineer at LGU Naga City.",
+    authorImage: "/authors/jireh-custodio.jpg",
+    date: "2024-12-20",
+    readTime: "15 min read",
+    category: "Database",
+    tags: ["Database", "Design Patterns", "SQL", "Performance", "Scalability"],
+    image: "/blog/database-design-hero.jpg",
+    featured: false,
+    likes: 112,
+    views: 2834,
+    publishedAt: "2024-12-20T09:00:00Z",
+    updatedAt: "2024-12-20T09:00:00Z"
+  },
+  {
+    id: 6,
+    title: "Building Real-time Applications with WebSockets",
+    excerpt: "Step-by-step guide to implementing real-time features using WebSockets, including chat systems and live updates.",
+    content: `
+# Building Real-time Applications with WebSockets
+
+Real-time applications have become essential in modern web development, enabling instant communication, live updates, and collaborative experiences. WebSockets provide the foundation for building these interactive applications by maintaining persistent, bidirectional communication between clients and servers.
+
+## Introduction
+
+Traditional HTTP request-response cycles are insufficient for real-time applications that require instant updates. WebSockets solve this by establishing a persistent connection that allows both client and server to send data at any time, making them perfect for chat applications, live notifications, collaborative editing, and real-time dashboards.
+
+## WebSocket Fundamentals
+
+### Understanding the WebSocket Protocol
+
+WebSockets start with an HTTP handshake that upgrades the connection:
+
+\`\`\`javascript
+// Client-side WebSocket connection
+const socket = new WebSocket('ws://localhost:8080');
+
+socket.onopen = function(event) {
+  console.log('Connected to WebSocket server');
+};
+
+socket.onmessage = function(event) {
+  const data = JSON.parse(event.data);
+  console.log('Received:', data);
+};
+
+socket.onclose = function(event) {
+  console.log('WebSocket connection closed');
+};
+
+socket.onerror = function(error) {
+  console.error('WebSocket error:', error);
+};
+\`\`\`
+
+### Server-Side Implementation with Node.js
+
+\`\`\`javascript
+// Using ws library
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', function connection(ws, request) {
+  console.log('New client connected');
+  
+  ws.on('message', function incoming(message) {
+    console.log('Received:', message);
+    
+    // Broadcast to all connected clients
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+  
+  ws.on('close', function close() {
+    console.log('Client disconnected');
+  });
+});
+\`\`\`
+
+## Building a Real-time Chat Application
+
+### Frontend Implementation with React
+
+\`\`\`typescript
+import React, { useState, useEffect, useRef } from 'react';
+
+interface Message {
+  id: string;
+  user: string;
+  content: string;
+  timestamp: number;
+}
+
+const ChatComponent: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [connected, setConnected] = useState(false);
+  const [username, setUsername] = useState('');
+  const socketRef = useRef<WebSocket | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Initialize WebSocket connection
+    const connect = () => {
+      socketRef.current = new WebSocket('ws://localhost:8080');
+      
+      socketRef.current.onopen = () => {
+        setConnected(true);
+        console.log('Connected to chat server');
+      };
+      
+      socketRef.current.onmessage = (event) => {
+        const message: Message = JSON.parse(event.data);
+        setMessages(prev => [...prev, message]);
+      };
+      
+      socketRef.current.onclose = () => {
+        setConnected(false);
+        console.log('Disconnected from chat server');
+        
+        // Attempt to reconnect after 3 seconds
+        setTimeout(connect, 3000);
+      };
+      
+      socketRef.current.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
+    };
+
+    if (username) {
+      connect();
+    }
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
+  }, [username]);
+
+  useEffect(() => {
+    // Auto-scroll to bottom when new messages arrive
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const sendMessage = () => {
+    if (inputValue.trim() && socketRef.current && connected) {
+      const message: Message = {
+        id: Date.now().toString(),
+        user: username,
+        content: inputValue.trim(),
+        timestamp: Date.now(),
+      };
+      
+      socketRef.current.send(JSON.stringify(message));
+      setInputValue('');
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
+  if (!username) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="bg-white p-8 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold mb-4">Join Chat</h2>
+          <input
+            type="text"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && setUsername(username)}
+            className="w-full p-2 border rounded-md"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col h-screen bg-gray-100">
+      {/* Header */}
+      <div className="bg-blue-600 text-white p-4">
+        <h1 className="text-xl font-bold">Real-time Chat</h1>
+        <p className="text-sm">
+          {connected ? 'Connected' : 'Disconnected'} as {username}
+        </p>
+      </div>
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className={\`flex \${message.user === username ? 'justify-end' : 'justify-start'}\`}
+          >
+            <div
+              className={\`max-w-xs lg:max-w-md px-4 py-2 rounded-lg \${
+                message.user === username
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-800'
+              }\`}
+            >
+              <p className="text-sm font-semibold">{message.user}</p>
+              <p>{message.content}</p>
+              <p className="text-xs opacity-75 mt-1">
+                {new Date(message.timestamp).toLocaleTimeString()}
+              </p>
+            </div>
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input */}
+      <div className="bg-white p-4 border-t">
+        <div className="flex space-x-2">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+            className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            disabled={!connected}
+          />
+          <button
+            onClick={sendMessage}
+            disabled={!connected || !inputValue.trim()}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ChatComponent;
+\`\`\`
+
+### Enhanced Server with Express and Socket.IO
+
+\`\`\`javascript
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const cors = require('cors');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
+
+app.use(cors());
+app.use(express.json());
+
+// Store connected users and rooms
+const users = new Map();
+const rooms = new Map();
+
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  // Handle user joining
+  socket.on('join', ({ username, room }) => {
+    const user = {
+      id: socket.id,
+      username,
+      room
+    };
+    
+    users.set(socket.id, user);
+    socket.join(room);
+    
+    // Add user to room
+    if (!rooms.has(room)) {
+      rooms.set(room, new Set());
+    }
+    rooms.get(room).add(socket.id);
+    
+    // Notify room about new user
+    socket.to(room).emit('userJoined', {
+      username,
+      message: \`\${username} joined the room\`,
+      timestamp: Date.now()
+    });
+    
+    // Send room user list
+    const roomUsers = Array.from(rooms.get(room))
+      .map(id => users.get(id))
+      .filter(Boolean);
+    
+    io.to(room).emit('roomUsers', roomUsers);
+  });
+
+  // Handle messages
+  socket.on('message', (data) => {
+    const user = users.get(socket.id);
+    if (user) {
+      const message = {
+        id: Date.now().toString(),
+        user: user.username,
+        content: data.content,
+        timestamp: Date.now(),
+        room: user.room
+      };
+      
+      // Broadcast to room
+      io.to(user.room).emit('message', message);
+      
+      // Store message (in production, save to database)
+      console.log(\`Message in \${user.room}:\`, message);
+    }
+  });
+
+  // Handle typing indicators
+  socket.on('typing', () => {
+    const user = users.get(socket.id);
+    if (user) {
+      socket.to(user.room).emit('userTyping', {
+        username: user.username,
+        typing: true
+      });
+    }
+  });
+
+  socket.on('stopTyping', () => {
+    const user = users.get(socket.id);
+    if (user) {
+      socket.to(user.room).emit('userTyping', {
+        username: user.username,
+        typing: false
+      });
+    }
+  });
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    const user = users.get(socket.id);
+    if (user) {
+      // Remove from room
+      if (rooms.has(user.room)) {
+        rooms.get(user.room).delete(socket.id);
+        if (rooms.get(user.room).size === 0) {
+          rooms.delete(user.room);
+        }
+      }
+      
+      // Notify room about user leaving
+      socket.to(user.room).emit('userLeft', {
+        username: user.username,
+        message: \`\${user.username} left the room\`,
+        timestamp: Date.now()
+      });
+      
+      users.delete(socket.id);
+    }
+    
+    console.log('User disconnected:', socket.id);
+  });
+});
+
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(\`Server running on port \${PORT}\`);
+});
+\`\`\`
+
+## Advanced Real-time Features
+
+### Real-time Notifications System
+
+\`\`\`typescript
+// Notification service
+class NotificationService {
+  private socket: WebSocket | null = null;
+  private listeners: Map<string, Set<Function>> = new Map();
+
+  connect(userId: string) {
+    this.socket = new WebSocket(\`ws://localhost:8080?userId=\${userId}\`);
+    
+    this.socket.onmessage = (event) => {
+      const notification = JSON.parse(event.data);
+      this.handleNotification(notification);
+    };
+  }
+
+  subscribe(type: string, callback: Function) {
+    if (!this.listeners.has(type)) {
+      this.listeners.set(type, new Set());
+    }
+    this.listeners.get(type)!.add(callback);
+  }
+
+  unsubscribe(type: string, callback: Function) {
+    this.listeners.get(type)?.delete(callback);
+  }
+
+  private handleNotification(notification: any) {
+    const callbacks = this.listeners.get(notification.type);
+    if (callbacks) {
+      callbacks.forEach(callback => callback(notification));
+    }
+  }
+}
+
+// React hook for notifications
+const useNotifications = () => {
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const serviceRef = useRef<NotificationService>(new NotificationService());
+
+  useEffect(() => {
+    const service = serviceRef.current;
+    
+    service.subscribe('message', (notification) => {
+      setNotifications(prev => [...prev, notification]);
+    });
+
+    service.subscribe('mention', (notification) => {
+      // Show desktop notification for mentions
+      if (Notification.permission === 'granted') {
+        new Notification('You were mentioned!', {
+          body: notification.content,
+          icon: '/notification-icon.png'
+        });
+      }
+    });
+
+    return () => {
+      service.disconnect();
+    };
+  }, []);
+
+  return { notifications, service: serviceRef.current };
+};
+\`\`\`
+
+### Live Collaborative Editing
+
+\`\`\`typescript
+// Operational Transform for collaborative editing
+class OperationalTransform {
+  static transform(op1: Operation, op2: Operation): [Operation, Operation] {
+    if (op1.type === 'insert' && op2.type === 'insert') {
+      if (op1.position <= op2.position) {
+        return [
+          op1,
+          { ...op2, position: op2.position + op1.text.length }
+        ];
+      } else {
+        return [
+          { ...op1, position: op1.position + op2.text.length },
+          op2
+        ];
+      }
+    }
+    
+    if (op1.type === 'delete' && op2.type === 'insert') {
+      if (op1.position <= op2.position) {
+        return [
+          op1,
+          { ...op2, position: op2.position - op1.length }
+        ];
+      } else {
+        return [
+          { ...op1, position: op1.position + op2.text.length },
+          op2
+        ];
+      }
+    }
+    
+    // Handle other operation combinations...
+    return [op1, op2];
+  }
+}
+
+// Collaborative text editor component
+const CollaborativeEditor: React.FC = () => {
+  const [content, setContent] = useState('');
+  const [cursors, setCursors] = useState<Map<string, number>>(new Map());
+  const socketRef = useRef<WebSocket | null>(null);
+  const editorRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    socketRef.current = new WebSocket('ws://localhost:8080/editor');
+    
+    socketRef.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      
+      switch (data.type) {
+        case 'operation':
+          applyOperation(data.operation);
+          break;
+        case 'cursor':
+          setCursors(prev => new Map(prev.set(data.userId, data.position)));
+          break;
+      }
+    };
+
+    return () => {
+      socketRef.current?.close();
+    };
+  }, []);
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newContent = e.target.value;
+    const operation = generateOperation(content, newContent);
+    
+    setContent(newContent);
+    
+    if (socketRef.current && operation) {
+      socketRef.current.send(JSON.stringify({
+        type: 'operation',
+        operation
+      }));
+    }
+  };
+
+  const handleCursorChange = () => {
+    if (editorRef.current && socketRef.current) {
+      const position = editorRef.current.selectionStart;
+      socketRef.current.send(JSON.stringify({
+        type: 'cursor',
+        position
+      }));
+    }
+  };
+
+  return (
+    <div className="relative">
+      <textarea
+        ref={editorRef}
+        value={content}
+        onChange={handleTextChange}
+        onSelect={handleCursorChange}
+        className="w-full h-96 p-4 border rounded-md font-mono"
+      />
+      
+      {/* Render other users' cursors */}
+      {Array.from(cursors.entries()).map(([userId, position]) => (
+        <div
+          key={userId}
+          className="absolute bg-blue-500 w-0.5 h-6 pointer-events-none"
+          style={{ 
+            left: \`\${getPositionX(position)}px\`,
+            top: \`\${getPositionY(position)}px\`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+\`\`\`
+
+## Performance and Scalability
+
+### Connection Management
+
+\`\`\`javascript
+// Redis adapter for Socket.IO scaling
+const redis = require('redis');
+const redisAdapter = require('socket.io-redis');
+
+const redisClient = redis.createClient({
+  host: 'localhost',
+  port: 6379
+});
+
+io.adapter(redisAdapter({ 
+  host: 'localhost', 
+  port: 6379 
+}));
+
+// Connection limits and health monitoring
+const connectionLimits = {
+  maxConnections: 10000,
+  rateLimitWindow: 60000, // 1 minute
+  maxConnectionsPerIP: 50
+};
+
+const connectionTracker = new Map();
+
+io.use((socket, next) => {
+  const clientIP = socket.request.connection.remoteAddress;
+  const now = Date.now();
+  
+  // Clean old entries
+  for (const [ip, data] of connectionTracker) {
+    if (now - data.lastConnection > connectionLimits.rateLimitWindow) {
+      connectionTracker.delete(ip);
+    }
+  }
+  
+  // Check rate limits
+  const clientData = connectionTracker.get(clientIP) || {
+    connections: 0,
+    lastConnection: now
+  };
+  
+  if (clientData.connections >= connectionLimits.maxConnectionsPerIP) {
+    return next(new Error('Rate limit exceeded'));
+  }
+  
+  clientData.connections++;
+  clientData.lastConnection = now;
+  connectionTracker.set(clientIP, clientData);
+  
+  next();
+});
+\`\`\`
+
+### Message Queuing and Persistence
+
+\`\`\`javascript
+// Redis for message queuing
+const Queue = require('bull');
+const messageQueue = new Queue('message processing', {
+  redis: {
+    host: 'localhost',
+    port: 6379
+  }
+});
+
+// Process messages asynchronously
+messageQueue.process('processMessage', async (job) => {
+  const { message, room } = job.data;
+  
+  // Save to database
+  await saveMessageToDatabase(message);
+  
+  // Send push notifications
+  await sendPushNotifications(message, room);
+  
+  // Update search index
+  await updateSearchIndex(message);
+});
+
+// Add message to queue
+io.on('connection', (socket) => {
+  socket.on('message', (data) => {
+    // Immediate broadcast for real-time experience
+    socket.to(data.room).emit('message', data);
+    
+    // Queue for processing
+    messageQueue.add('processMessage', {
+      message: data,
+      room: data.room
+    });
+  });
+});
+\`\`\`
+
+## Security Considerations
+
+### Authentication and Authorization
+
+\`\`\`javascript
+const jwt = require('jsonwebtoken');
+
+// JWT middleware for WebSocket
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  
+  if (!token) {
+    return next(new Error('Authentication error'));
+  }
+  
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return next(new Error('Authentication error'));
+    }
+    
+    socket.userId = decoded.userId;
+    socket.userRole = decoded.role;
+    next();
+  });
+});
+
+// Room-based authorization
+socket.on('joinRoom', (roomId) => {
+  // Check if user has permission to join room
+  if (hasRoomPermission(socket.userId, roomId)) {
+    socket.join(roomId);
+  } else {
+    socket.emit('error', { message: 'Access denied' });
+  }
+});
+\`\`\`
+
+### Input Validation and Sanitization
+
+\`\`\`javascript
+const validator = require('validator');
+const DOMPurify = require('dompurify');
+
+const validateMessage = (message) => {
+  // Check message length
+  if (!message.content || message.content.length > 1000) {
+    throw new Error('Invalid message length');
+  }
+  
+  // Sanitize HTML content
+  message.content = DOMPurify.sanitize(message.content);
+  
+  // Validate user input
+  if (!validator.isAlphanumeric(message.user, 'en-US', { ignore: ' _-' })) {
+    throw new Error('Invalid username');
+  }
+  
+  return message;
+};
+
+socket.on('message', (data) => {
+  try {
+    const validMessage = validateMessage(data);
+    // Process valid message
+  } catch (error) {
+    socket.emit('error', { message: error.message });
+  }
+});
+\`\`\`
+
+## Conclusion
+
+WebSockets enable powerful real-time applications that provide immediate, interactive experiences. By understanding the fundamentals, implementing proper architecture patterns, and considering performance and security, you can build robust real-time applications that scale effectively.
+
+Key takeaways:
+- **Plan for scale** from the beginning with proper architecture
+- **Implement proper error handling** and reconnection logic
+- **Secure your WebSocket connections** with authentication and validation
+- **Monitor performance** and optimize for your specific use cases
+- **Use appropriate tools** like Socket.IO for production applications
+
+Real-time applications open up new possibilities for user engagement and collaboration, making them essential for modern web development.
+
+## Additional Resources
+
+- [WebSocket API Documentation](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+- [Socket.IO Documentation](https://socket.io/docs/)
+- [Real-time Web Technologies Guide](https://www.html5rocks.com/en/tutorials/websockets/basics/)
+- [Operational Transform Algorithm](https://operational-transformation.github.io/)
+- [WebSocket Security Best Practices](https://owasp.org/www-community/attacks/WebSocket_security)
+`,
+    author: "Jireh Custodio",
+    authorBio: "Computer Engineering graduate and Full-Stack Developer specializing in cloud computing, cybersecurity, and modern web technologies. Currently working as IT Support Engineer at LGU Naga City.",
+    authorImage: "/authors/jireh-custodio.jpg",
+    date: "2024-12-15",
+    readTime: "9 min read",
+    category: "Development",
+    tags: ["WebSocket", "Real-time", "JavaScript", "Node.js", "Chat"],
+    image: "/blog/websockets-hero.jpg",
+    featured: false,
+    likes: 87,
+    views: 1945,
+    publishedAt: "2024-12-15T11:00:00Z",
+    updatedAt: "2024-12-15T11:00:00Z"
   }
 ];
 
@@ -1651,6 +3269,16 @@ export function getFeaturedArticles(): Article[] {
 
 // Helper function to get articles by category
 export function getArticlesByCategory(category: string): Article[] {
-  if (category === 'All') return articlesData;
+  if (category === "All") return articlesData;
   return articlesData.filter(article => article.category === category);
+}
+
+// Helper function to search articles
+export function searchArticles(query: string): Article[] {
+  const lowercaseQuery = query.toLowerCase();
+  return articlesData.filter(article => 
+    article.title.toLowerCase().includes(lowercaseQuery) ||
+    article.excerpt.toLowerCase().includes(lowercaseQuery) ||
+    article.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
+  );
 }

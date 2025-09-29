@@ -4,103 +4,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { FaCalendar, FaClock, FaTag, FaSearch, FaArrowRight } from 'react-icons/fa';
+import { getAllArticles } from '../lib/articles';
 
-// Types
-interface Article {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  date: string;
-  readTime: string;
-  category: string;
-  tags: string[];
-  image: string;
-  featured: boolean;
-}
-
-// Sample blog articles
-const articles: Article[] = [
-  {
-    id: 1,
-    title: "Building Scalable React Applications with TypeScript",
-    excerpt: "Learn how to structure large-scale React applications using TypeScript, modern patterns, and best practices for maintainable code.",
-    content: "In this comprehensive guide, we'll explore the essential patterns and practices for building scalable React applications...",
-    author: "Jireh Custodio",
-    date: "2025-01-15",
-    readTime: "8 min read",
-    category: "Development",
-    tags: ["React", "TypeScript", "Architecture"],
-    image: "/blog/react-typescript.jpg",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "The Future of Web Development: What's Coming in 2025",
-    excerpt: "Exploring emerging technologies, frameworks, and trends that will shape web development in the coming year.",
-    content: "Web development continues to evolve at a rapid pace. Here are the key trends and technologies to watch...",
-    author: "Jireh Custodio",
-    date: "2025-01-10",
-    readTime: "6 min read",
-    category: "Technology",
-    tags: ["Web Development", "Trends", "Future"],
-    image: "/blog/web-future.jpg",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Cloud Security Best Practices for Modern Applications",
-    excerpt: "Essential security considerations and implementation strategies for cloud-based applications and infrastructure.",
-    content: "As we move more applications to the cloud, security becomes paramount. This article covers essential practices...",
-    author: "Jireh Custodio",
-    date: "2025-01-05",
-    readTime: "10 min read",
-    category: "Security",
-    tags: ["Cloud", "Security", "DevOps"],
-    image: "/blog/cloud-security.jpg",
-    featured: true
-  },
-  {
-    id: 4,
-    title: "Optimizing Performance in Next.js Applications",
-    excerpt: "Advanced techniques for improving load times, SEO, and user experience in Next.js applications.",
-    content: "Performance optimization is crucial for modern web applications. In this article, we'll cover advanced Next.js techniques...",
-    author: "Jireh Custodio",
-    date: "2024-12-28",
-    readTime: "12 min read",
-    category: "Performance",
-    tags: ["Next.js", "Performance", "Optimization"],
-    image: "/blog/nextjs-performance.jpg",
-    featured: false
-  },
-  {
-    id: 5,
-    title: "Database Design Patterns for Scalable Applications",
-    excerpt: "Comprehensive guide to database design patterns, normalization strategies, and performance optimization techniques.",
-    content: "Effective database design is the foundation of any scalable application. Let's explore proven patterns and strategies...",
-    author: "Jireh Custodio",
-    date: "2024-12-20",
-    readTime: "15 min read",
-    category: "Database",
-    tags: ["Database", "Design Patterns", "SQL"],
-    image: "/blog/database-design.jpg",
-    featured: false
-  },
-  {
-    id: 6,
-    title: "Building Real-time Applications with WebSockets",
-    excerpt: "Step-by-step guide to implementing real-time features using WebSockets, including chat systems and live updates.",
-    content: "Real-time applications are becoming increasingly important. Here's how to implement them effectively using WebSockets...",
-    author: "Jireh Custodio",
-    date: "2024-12-15",
-    readTime: "9 min read",
-    category: "Development",
-    tags: ["WebSocket", "Real-time", "JavaScript"],
-    image: "/blog/websockets.jpg",
-    featured: false
-  }
-];
+// Get articles from the main articles file
+const articles = getAllArticles();
 
 const categories = ["All", "Development", "Technology", "Security", "Performance", "Database"];
 
