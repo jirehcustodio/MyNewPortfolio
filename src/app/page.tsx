@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import LiveTestimonials from "./components/LiveTestimonials";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 
@@ -74,13 +75,21 @@ export default function Home() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.0, duration: 0.6 }}
             >
-              <Blog />
+              <LiveTestimonials />
             </motion.div>
             
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.6 }}
+            >
+              <Blog />
+            </motion.div>
+            
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.6 }}
             >
               <Contact />
             </motion.div>
