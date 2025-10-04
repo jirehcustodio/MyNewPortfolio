@@ -19,6 +19,7 @@ import {
 import { FaExternalLinkAlt, FaGithub, FaPlay, FaTimes, FaClock, FaUsers, FaQuoteLeft, FaTrophy } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import { projects, categories as projectCategories, type ProjectData } from '../lib/projects';
+import analytics from '../lib/analytics';
 
 // Tech stack icons mapping
 const techIcons: { [key: string]: IconType } = {
@@ -317,6 +318,7 @@ export default function Projects() {
                       <motion.button
                         onClick={(e) => {
                           e.stopPropagation();
+                          analytics.trackPortfolioEvent.viewProject(project.title, project.category);
                           setSelectedProject(project);
                         }}
                         whileHover={{ scale: 1.02 }}
@@ -331,6 +333,7 @@ export default function Projects() {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
+                          analytics.trackPortfolioEvent.viewSourceCode(project.title);
                           window.open(project.githubLink, "_blank", "noopener,noreferrer");
                         }}
                         whileHover={{ scale: 1.02 }}
@@ -558,6 +561,7 @@ export default function Projects() {
                     {selectedProject.isLiveDemo && selectedProject.demoUrl && (
                       <Link
                         href={selectedProject.demoUrl}
+                        onClick={() => analytics.trackPortfolioEvent.openProjectDemo(selectedProject.title)}
                         className="flex-1 py-4 bg-green-500 hover:bg-green-600 rounded-xl text-white font-semibold text-center transition-colors flex items-center justify-center gap-2"
                       >
                         <FaPlay className="w-4 h-4" />
@@ -568,6 +572,7 @@ export default function Projects() {
                       href={selectedProject.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => analytics.trackPortfolioEvent.viewSourceCode(selectedProject.title)}
                       className="flex-1 py-4 bg-neutral-700 hover:bg-neutral-600 rounded-xl text-white font-semibold text-center transition-colors flex items-center justify-center gap-2"
                     >
                       <FaGithub className="w-4 h-4" />

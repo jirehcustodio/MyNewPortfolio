@@ -28,6 +28,7 @@ import {
 } from 'react-icons/si';
 import { FaCode, FaServer, FaDatabase, FaTools, FaRocket, FaMobile, FaCloud, FaBrain } from 'react-icons/fa';
 import { IconType } from 'react-icons';
+import analytics from '../lib/analytics';
 
 // Skill categories and data
 interface Skill {
@@ -482,7 +483,10 @@ export default function Skills() {
             return (
               <motion.button
                 key={category.name}
-                onClick={() => setSelectedCategory(index)}
+                onClick={() => {
+                  setSelectedCategory(index);
+                  analytics.trackPortfolioEvent.viewSkillCategory(category.name);
+                }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm text-sm sm:text-base ${
