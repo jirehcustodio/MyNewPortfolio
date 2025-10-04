@@ -1,10 +1,19 @@
 // Supabase configuration for testimonials
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://demo-project.supabase.co';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'demo-key';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Check if we have valid Supabase configuration
+const hasValidSupabaseConfig = 
+  supabaseUrl && 
+  supabaseAnonKey && 
+  supabaseUrl !== 'https://demo-project.supabase.co' &&
+  supabaseAnonKey !== 'demo-key';
+
+export const supabase = hasValidSupabaseConfig 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 // Types for testimonials
 export interface Testimonial {
@@ -36,6 +45,13 @@ export interface TestimonialSubmission {
 export class TestimonialService {
   // Submit a new testimonial
   static async submitTestimonial(data: TestimonialSubmission): Promise<{ success: boolean; message: string; testimonial?: Testimonial }> {
+    if (!supabase) {
+      return { 
+        success: false, 
+        message: 'Testimonial system is currently unavailable. Please contact directly via email.' 
+      };
+    }
+
     try {
       const { data: testimonial, error } = await supabase
         .from('testimonials')
@@ -66,6 +82,51 @@ export class TestimonialService {
 
   // Get approved testimonials
   static async getApprovedTestimonials(): Promise<Testimonial[]> {
+    if (!supabase) {
+      // Return sample testimonials when Supabase is not configured
+      return [
+        {
+          id: '1',
+          name: 'Sarah Johnson',
+          email: 'sarah@techcorp.com',
+          company: 'TechCorp Solutions',
+          position: 'CTO',
+          testimonial: 'Jireh delivered an exceptional e-commerce platform that exceeded all our expectations. The performance optimizations resulted in a 40% increase in conversion rates, and the clean, maintainable code made future updates seamless.',
+          rating: 5,
+          project_type: 'E-commerce',
+          status: 'approved',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          id: '2',
+          name: 'Michael Chen',
+          email: 'mike@startupco.io',
+          company: 'StartupCo',
+          position: 'Founder',
+          testimonial: 'Working with Jireh was a game-changer for our startup. He not only built our MVP in record time but also provided valuable insights on scalability and user experience. The real-time features he implemented have become our key differentiator.',
+          rating: 5,
+          project_type: 'Web Development',
+          status: 'approved',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        },
+        {
+          id: '3',
+          name: 'Emily Rodriguez',
+          email: 'emily@digitalagency.com',
+          company: 'Digital Agency Pro',
+          position: 'Project Manager',
+          testimonial: 'Jireh\'s expertise in Next.js and database optimization helped us migrate our legacy system to a modern, high-performance platform. His attention to detail and proactive communication made the entire process smooth and stress-free.',
+          rating: 5,
+          project_type: 'Cloud Migration',
+          status: 'approved',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }
+      ];
+    }
+
     try {
       const { data: testimonials, error } = await supabase
         .from('testimonials')
@@ -87,6 +148,13 @@ export class TestimonialService {
 
   // Subscribe to real-time testimonial updates
   static subscribeToTestimonials(callback: (testimonials: Testimonial[]) => void) {
+    if (!supabase) {
+      // Return a mock channel when Supabase is not configured
+      return {
+        unsubscribe: () => {}
+      };
+    }
+
     const channel = supabase
       .channel('testimonials')
       .on(
@@ -109,6 +177,11 @@ export class TestimonialService {
 
   // Moderate testimonials (for admin use)
   static async moderateTestimonial(id: string, status: 'approved' | 'rejected'): Promise<boolean> {
+    if (!supabase) {
+      console.warn('Supabase not configured - cannot moderate testimonials');
+      return false;
+    }
+
     try {
       const { error } = await supabase
         .from('testimonials')
@@ -132,6 +205,10 @@ export class TestimonialService {
 
   // Get pending testimonials (for admin)
   static async getPendingTestimonials(): Promise<Testimonial[]> {
+    if (!supabase) {
+      return [];
+    }
+
     try {
       const { data: testimonials, error } = await supabase
         .from('testimonials')

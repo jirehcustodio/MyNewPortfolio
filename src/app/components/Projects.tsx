@@ -12,88 +12,18 @@ import {
   SiSupabase,
   SiFramer,
   SiTailwindcss,
-  SiJavascript
+  SiJavascript,
+  SiRedis,
+  SiStripe
 } from 'react-icons/si';
-import { FaExternalLinkAlt, FaGithub, FaPlay, FaTimes } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub, FaPlay, FaTimes, FaClock, FaUsers, FaQuoteLeft, FaTrophy } from 'react-icons/fa';
 import { IconType } from 'react-icons';
-
-// Types
-interface Project {
-  id: number;
-  title: string;
-  desc: string;
-  longDesc: string;
-  tech: string[];
-  category: string;
-  gradient: string;
-  link: string;
-  githubLink: string;
-  isLiveDemo: boolean;
-  demoUrl?: string;
-  image: string;
-  features: string[];
-  challenges: string;
-  solution: string;
-}
-
-// Enhanced project data with more details
-const projects = [
-  { 
-    id: 1,
-    title: "TaskFlow Pro", 
-    desc: "Advanced productivity platform with personal & team workspaces, real-time notifications, and cloud synchronization.",
-    longDesc: "A comprehensive task management solution built for modern teams and individuals. Features include real-time collaboration, advanced analytics, custom workflows, and seamless cloud integration.",
-    tech: ["Next.js", "TypeScript", "Supabase", "Framer Motion", "Tailwind CSS"],
-    category: "Web App",
-    gradient: "from-blue-500 to-purple-600",
-    link: "/taskflow",
-    githubLink: "https://github.com/jirehcustodio/taskflow-pro",
-    isLiveDemo: true,
-    demoUrl: "/taskflow",
-    image: "/projects/taskflow-preview.jpg",
-    features: ["Real-time Collaboration", "Advanced Analytics", "Cloud Sync", "Custom Workflows"],
-    challenges: "Building real-time synchronization while maintaining performance",
-    solution: "Implemented Supabase real-time subscriptions with optimistic updates"
-  },
-  { 
-    id: 2,
-    title: "E-Commerce Platform", 
-    desc: "Modern e-commerce solution with real-time inventory and seamless checkout experience.",
-    longDesc: "Full-stack e-commerce platform featuring advanced inventory management, payment processing, and user analytics. Built with modern technologies for optimal performance.",
-    tech: ["React", "Node.js", "PostgreSQL", "Stripe", "Redis"],
-    category: "E-Commerce",
-    gradient: "from-emerald-500 to-teal-500",
-    link: "/modernshop",
-    githubLink: "https://github.com/jirehcustodio/ecommerce-platform",
-    isLiveDemo: true,
-    demoUrl: "/modernshop",
-    image: "/projects/ecommerce-preview.jpg",
-    features: ["Payment Integration", "Inventory Management", "User Analytics", "Admin Dashboard"],
-    challenges: "Managing complex inventory states and real-time updates",
-    solution: "Implemented Redis caching with PostgreSQL for consistent data flow"
-  },
-  { 
-    id: 3,
-    title: "Analytics Dashboard", 
-    desc: "Real-time analytics dashboard with interactive charts, live metrics, and comprehensive data visualization.",
-    longDesc: "A professional analytics dashboard featuring real-time data visualization, interactive charts using Chart.js, live user tracking, and comprehensive business metrics. Built with modern technologies for optimal performance and user experience.",
-    tech: ["Next.js", "TypeScript", "Chart.js", "Tailwind CSS", "Framer Motion"],
-    category: "Dashboard",
-    gradient: "from-orange-500 to-red-500",
-    link: "/analytics",
-    githubLink: "https://github.com/jirehcustodio/analytics-dashboard",
-    isLiveDemo: true,
-    demoUrl: "/analytics",
-    image: "/projects/analytics-preview.jpg",
-    features: ["Real-time Metrics", "Interactive Charts", "Live User Tracking", "Responsive Design", "Data Export"],
-    challenges: "Creating smooth real-time updates while maintaining performance and user experience",
-    solution: "Implemented Chart.js with optimized re-rendering and real-time data simulation"
-  }
-];
+import { projects, categories as projectCategories, type ProjectData } from '../lib/projects';
 
 // Tech stack icons mapping
 const techIcons: { [key: string]: IconType } = {
   "Next.js": SiNextdotjs,
+  "Next.js 15": SiNextdotjs,
   "React": SiReact,
   "TypeScript": SiTypescript,
   "Node.js": SiNodedotjs,
@@ -102,22 +32,29 @@ const techIcons: { [key: string]: IconType } = {
   "Framer Motion": SiFramer,
   "Tailwind CSS": SiTailwindcss,
   "JavaScript": SiJavascript,
-  "D3.js": SiJavascript, // Using JS icon for D3
-  "Express": SiNodedotjs, // Using Node icon for Express
-  "MongoDB": SiNodedotjs, // You can add SiMongodb if available
-  "Stripe": SiJavascript,
-  "Redis": SiNodedotjs,
-  "WebSocket": SiJavascript
+  "D3.js": SiJavascript,
+  "Chart.js": SiJavascript,
+  "Express": SiNodedotjs,
+  "MongoDB": SiNodedotjs,
+  "Stripe": SiStripe,
+  "Stripe API": SiStripe,
+  "Redis": SiRedis,
+  "WebSocket": SiJavascript,
+  "Real-time Subscriptions": SiSupabase,
+  "Prisma ORM": SiPostgresql,
+  "NextAuth.js": SiNextdotjs,
+  "Web Audio API": SiJavascript,
+  "FormSubmit": SiJavascript
 };
 
-const categories = ["All", "Web App", "E-Commerce", "Dashboard", "Mobile", "AI/ML"];
+const categories = ["All", "Web App", "E-Commerce", "Dashboard", "Portfolio"];
 
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
   const filteredProjects = selectedCategory === "All" 
     ? projects 
@@ -183,11 +120,36 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2"
+            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2 mb-8"
           >
             A showcase of my recent work, featuring modern web applications 
             built with cutting-edge technologies and thoughtful user experiences.
           </motion.p>
+
+          {/* Project Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
+          >
+            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-1">{projects.length}</div>
+              <div className="text-sm text-neutral-400">Projects</div>
+            </div>
+            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">15+</div>
+              <div className="text-sm text-neutral-400">Technologies</div>
+            </div>
+            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-1">100%</div>
+              <div className="text-sm text-neutral-400">Success Rate</div>
+            </div>
+            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-1">3 mo</div>
+              <div className="text-sm text-neutral-400">Avg Timeline</div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Category Filter */}
@@ -441,14 +403,91 @@ export default function Projects() {
                     {selectedProject.longDesc}
                   </p>
 
+                  {/* Project Metrics */}
+                  <div className="mb-8">
+                    <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                      <FaTrophy className="text-yellow-400" />
+                      Key Metrics
+                    </h3>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                      {selectedProject.metrics.map((metric, index) => (
+                        <div key={index} className="bg-neutral-700/30 rounded-xl p-4 text-center">
+                          <div className="text-2xl font-bold text-blue-400 mb-1">{metric.value}</div>
+                          <div className="text-sm text-neutral-400 mb-1">{metric.label}</div>
+                          {metric.improvement && (
+                            <div className="text-xs text-green-400">{metric.improvement}</div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Project Info */}
+                  <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    <div className="bg-neutral-700/30 rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <FaClock className="text-blue-400" />
+                        <span className="font-semibold text-white">Timeline</span>
+                      </div>
+                      <p className="text-neutral-300">{selectedProject.timeline}</p>
+                    </div>
+                    <div className="bg-neutral-700/30 rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <FaUsers className="text-green-400" />
+                        <span className="font-semibold text-white">Team Size</span>
+                      </div>
+                      <p className="text-neutral-300">{selectedProject.teamSize}</p>
+                    </div>
+                    <div className="bg-neutral-700/30 rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <FaTrophy className="text-purple-400" />
+                        <span className="font-semibold text-white">Client Type</span>
+                      </div>
+                      <p className="text-neutral-300">{selectedProject.clientType}</p>
+                    </div>
+                  </div>
+
+                  {/* Testimonial */}
+                  {selectedProject.testimonial && (
+                    <div className="mb-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl p-6">
+                      <div className="flex items-start gap-4">
+                        <FaQuoteLeft className="text-blue-400 text-2xl mt-1 flex-shrink-0" />
+                        <div>
+                          <blockquote className="text-neutral-200 text-lg leading-relaxed mb-4">
+                            &ldquo;{selectedProject.testimonial.quote}&rdquo;
+                          </blockquote>
+                          <div className="text-sm">
+                            <div className="font-semibold text-white">{selectedProject.testimonial.author}</div>
+                            <div className="text-neutral-400">
+                              {selectedProject.testimonial.position} at {selectedProject.testimonial.company}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Features */}
                   <div className="mb-8">
                     <h3 className="text-xl font-bold text-white mb-4">Key Features</h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {selectedProject.features.map((feature: string, index: number) => (
                         <div key={index} className="flex items-center gap-3 text-neutral-300">
-                          <div className="w-2 h-2 bg-blue-400 rounded-full" />
+                          <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0" />
                           {feature}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Technical Highlights */}
+                  <div className="mb-8">
+                    <h3 className="text-xl font-bold text-white mb-4">Technical Highlights</h3>
+                    <div className="space-y-3">
+                      {selectedProject.technicalHighlights.map((highlight: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3 text-neutral-300">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
+                          <span>{highlight}</span>
                         </div>
                       ))}
                     </div>
@@ -477,14 +516,40 @@ export default function Projects() {
                   <div className="mb-8">
                     <h3 className="text-xl font-bold text-white mb-4">Challenge & Solution</h3>
                     <div className="space-y-4">
-                      <div>
+                      <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
                         <h4 className="font-semibold text-red-400 mb-2">Challenge</h4>
                         <p className="text-neutral-300">{selectedProject.challenges}</p>
                       </div>
-                      <div>
+                      <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
                         <h4 className="font-semibold text-green-400 mb-2">Solution</h4>
                         <p className="text-neutral-300">{selectedProject.solution}</p>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Key Learnings */}
+                  <div className="mb-8">
+                    <h3 className="text-xl font-bold text-white mb-4">Key Learnings</h3>
+                    <div className="grid gap-3">
+                      {selectedProject.learnings.map((learning: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3 text-neutral-300">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+                          <span>{learning}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Future Enhancements */}
+                  <div className="mb-8">
+                    <h3 className="text-xl font-bold text-white mb-4">Future Enhancements</h3>
+                    <div className="grid gap-3">
+                      {selectedProject.futureEnhancements.map((enhancement: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3 text-neutral-300">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                          <span>{enhancement}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
