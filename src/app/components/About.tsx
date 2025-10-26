@@ -44,8 +44,9 @@ const skills = [
 ];
 
 const experiences = [
-  { company: "LGU Naga City", role: "IT Support Engineer", duration: "2024" },
+  { company: "LGU Naga - MyNaga App", role: "IT Support", duration: "2025 - Present" },
   { company: "BESO COSH", role: "Safety Officer 2", duration: "2024 - 2025" },
+  { company: "LGU Naga City", role: "IT Support Engineer", duration: "2024" },
   { company: "Shot Studio", role: "Production Assistant Intern", duration: "2024 - 2025" },
   { company: "Self-employed", role: "Freelance Web Developer & Multimedia Specialist", duration: "2020 - Present" }
 ];
