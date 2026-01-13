@@ -69,30 +69,14 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative group cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="cursor-pointer"
             onClick={() => handleNavClick('#hero')}
           >
-            <motion.h1 
-              className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0%", "100%", "0%"]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              style={{ backgroundSize: "200% 200%" }}
-            >
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-500">
               Jireh.dev
-            </motion.h1>
-            
-            {/* Underline effect */}
-            <motion.div
-              className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500"
-              initial={{ scaleX: 0 }}
-              whileHover={{ scaleX: 1 }}
-              transition={{ duration: 0.3 }}
-              style={{ originX: 0 }}
-            />
+            </h1>
           </motion.div>
 
           {/* Desktop Navigation */}
