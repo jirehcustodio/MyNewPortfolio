@@ -12,15 +12,13 @@ import {
   SiNodedotjs,
   SiPython,
   SiHtml5,
-  SiCplusplus,
   SiMysql,
   SiMongodb,
-  SiAdobe,
   SiFigma,
   SiCisco,
   SiCloudflare
 } from 'react-icons/si';
-import { FaShieldAlt, FaJava } from 'react-icons/fa';
+import { FaJava } from 'react-icons/fa';
 
 const skills = [
   { name: "JavaScript", level: 90, color: "from-yellow-400 to-yellow-600", icon: SiJavascript },
@@ -33,13 +31,10 @@ const skills = [
   { name: "Python", level: 85, color: "from-blue-500 to-blue-700", icon: SiPython },
   { name: "HTML/CSS", level: 95, color: "from-orange-400 to-orange-600", icon: SiHtml5 },
   { name: "Java", level: 80, color: "from-red-400 to-red-600", icon: FaJava },
-  { name: "C/C++", level: 75, color: "from-blue-600 to-blue-800", icon: SiCplusplus },
   { name: "MySQL", level: 80, color: "from-blue-400 to-blue-600", icon: SiMysql },
   { name: "MongoDB", level: 75, color: "from-green-500 to-green-700", icon: SiMongodb },
-  { name: "Adobe Suite", level: 90, color: "from-purple-400 to-purple-600", icon: SiAdobe },
   { name: "Figma", level: 85, color: "from-purple-500 to-pink-500", icon: SiFigma },
   { name: "Cisco Networking", level: 80, color: "from-blue-500 to-indigo-600", icon: SiCisco },
-  { name: "Cybersecurity", level: 85, color: "from-red-500 to-red-700", icon: FaShieldAlt },
   { name: "Cloud Computing", level: 80, color: "from-cyan-400 to-cyan-600", icon: SiCloudflare }
 ];
 

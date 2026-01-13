@@ -53,6 +53,8 @@ export class TestimonialService {
     }
 
     try {
+      console.log('🔍 Submitting testimonial to Supabase...', { supabaseUrl, hasValidConfig: hasValidSupabaseConfig });
+      
       const { data: testimonial, error } = await supabase
         .from('testimonials')
         .insert([{
@@ -65,8 +67,17 @@ export class TestimonialService {
         .single();
 
       if (error) {
-        console.error('Error submitting testimonial:', error);
-        return { success: false, message: 'Failed to submit testimonial. Please try again.' };
+        console.error('❌ Error submitting testimonial:', {
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code,
+          fullError: error
+        });
+        return { 
+          success: false, 
+          message: `Failed to submit testimonial: ${error.message || 'Please try again.'}` 
+        };
       }
 
       return { 

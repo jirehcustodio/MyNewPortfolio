@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Testimonial Insert</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .result {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+        .success { background: #1e4620; border-color: #2ea043; }
+        .error { background: #4a1f1f; border-color: #e34850; }
+        .info { background: #1f3a4a; border-color: #3b82f6; }
+        button {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover { background: #2563eb; }
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        h2 { color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Supabase Testimonials Test</h1>
+    
+    <div id="results"></div>
+    
+    <h2>Step 1: Check Configuration</h2>
+    <button onclick="testConfig()">Test Config</button>
+    
+    <h2>Step 2: Check Table Exists</h2>
+    <button onclick="testTable()">Test Table</button>
+    
+    <h2>Step 3: Try Reading Data</h2>
+    <button onclick="testRead()">Test Read</button>
+    
+    <h2>Step 4: Try Inserting Test Data</h2>
+    <button onclick="testInsert()">Test Insert</button>
+
+    <script>
+        const SUPABASE_URL = 'https://xcymxecvyoumhfcekvzs.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjeW14ZWN2eW91bWhmY2VrdnpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1NzE3MTMsImV4cCI6MjA3NDE0NzcxM30.lK25Trx7Ml9Zp4dOw4bHjMb7U6KUv2WG971WtmLeMvM';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        function showResult(title, type, message, details = null) {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `
+                <h3>${title}</h3>
+                <p>${message}</p>
+                ${details ? `<pre>${JSON.stringify(details, null, 2)}</pre>` : ''}
+            `;
+            document.getElementById('results').appendChild(div);
+        }
+        
+        async function testConfig() {
+            showResult('Configuration Test', 'info', 'Testing Supabase configuration...');
+            
+            try {
+                const { data, error } = await supabase.auth.getSession();
+                
+                if (error && !error.message.includes('session_not_found')) {
+                    showResult('❌ Config Error', 'error', 'Invalid credentials', error);
+                } else {
+                    showResult('✅ Config OK', 'success', 'Supabase connection works!');
+                }
+            } catch (err) {
+                showResult('❌ Config Error', 'error', err.message, err);
+            }
+        }
+        
+        async function testTable() {
+            showResult('Table Test', 'info', 'Checking if testimonials table exists...');
+            
+            try {
+                const { data, error } = await supabase
+                    .from('testimonials')
+                    .select('count', { count: 'exact', head: true });
+                
+                if (error) {
+                    showResult('❌ Table Error', 'error', 'Table might not exist or has issues', error);
+                } else {
+                    showResult('✅ Table Exists', 'success', 'Testimonials table found!');
+                }
+            } catch (err) {
+                showResult('❌ Table Error', 'error', err.message, err);
+            }
+        }
+        
+        async function testRead() {
+            showResult('Read Test', 'info', 'Trying to read testimonials...');
+            
+            try {
+                const { data, error } = await supabase
+                    .from('testimonials')
+                    .select('*')
+                    .limit(5);
+                
+                if (error) {
+                    showResult('❌ Read Error', 'error', 'Cannot read testimonials', error);
+                } else {
+                    showResult('✅ Read Success', 'success', `Found ${data.length} testimonial(s)`, data);
+                }
+            } catch (err) {
+                showResult('❌ Read Error', 'error', err.message, err);
+            }
+        }
+        
+        async function testInsert() {
+            showResult('Insert Test', 'info', 'Trying to insert test testimonial...');
+            
+            const testData = {
+                name: 'Test User',
+                email: 'test@example.com',
+                company: 'Test Company',
+                position: 'Test Position',
+                testimonial: 'This is a test testimonial to verify the system works.',
+                rating: 5,
+                project_type: 'Web Development',
+                status: 'pending',
+                created_at: new Date().toISOString(),
+                updated_at: new Date().toISOString()
+            };
+            
+            try {
+                const { data, error } = await supabase
+                    .from('testimonials')
+                    .insert([testData])
+                    .select()
+                    .single();
+                
+                if (error) {
+                    showResult('❌ Insert Error', 'error', 'Cannot insert testimonial', {
+                        message: error.message,
+                        details: error.details,
+                        hint: error.hint,
+                        code: error.code
+                    });
+                } else {
+                    showResult('✅ Insert Success', 'success', 'Test testimonial inserted!', data);
+                }
+            } catch (err) {
+                showResult('❌ Insert Error', 'error', err.message, err);
+            }
+        }
+    </script>
+</body>
+</html>

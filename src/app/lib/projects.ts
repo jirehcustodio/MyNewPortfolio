@@ -37,185 +37,185 @@ export interface ProjectData {
 export const projects: ProjectData[] = [
   { 
     id: 1,
-    title: "TaskFlow Pro", 
-    desc: "Advanced productivity platform with personal & team workspaces, real-time notifications, and cloud synchronization.",
-    longDesc: "A comprehensive task management solution designed for modern teams and productivity-focused individuals. TaskFlow Pro combines the simplicity of personal task management with the power of team collaboration, featuring real-time synchronization, advanced analytics, and intelligent workflow automation.",
-    tech: ["Next.js 15", "TypeScript", "Supabase", "Framer Motion", "Tailwind CSS", "PostgreSQL", "Real-time Subscriptions"],
+    title: "MyNaga CRUD App", 
+    desc: "Comprehensive CRUD application for managing municipal data and records with advanced filtering and data management capabilities.",
+    longDesc: "A full-featured CRUD (Create, Read, Update, Delete) application built for LGU Naga City's MyNaga platform. This application handles municipal data management with robust features for data entry, retrieval, updating, and deletion. Designed with user-friendly interfaces and efficient data handling for government operations.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "API Integration", "Form Validation"],
     category: "Web App",
-    gradient: "from-blue-500 to-purple-600",
-    link: "/taskflow",
-    githubLink: "https://github.com/jirehcustodio/taskflow-pro",
+    gradient: "from-blue-500 to-cyan-600",
+    link: "https://mynaga-crud-app.vercel.app/",
+    githubLink: "https://github.com/jirehcustodio/mynaga-crud-app",
     isLiveDemo: true,
-    demoUrl: "/taskflow",
-    image: "/projects/taskflow-preview.jpg",
+    demoUrl: "https://mynaga-crud-app.vercel.app/",
+    image: "/projects/mynaga-crud-preview.jpg",
     features: [
-      "Real-time Collaboration", 
-      "Advanced Analytics Dashboard", 
-      "Cloud Synchronization", 
-      "Custom Workflow Builder",
-      "Smart Notifications",
-      "Team Performance Insights",
-      "Mobile-Responsive Design",
-      "Offline Mode Support"
+      "Complete CRUD Operations", 
+      "Data Validation & Error Handling", 
+      "Advanced Search & Filtering", 
+      "Responsive Data Tables",
+      "Form Management System",
+      "User-friendly Interface",
+      "Export & Import Functionality",
+      "Real-time Data Updates"
     ],
-    challenges: "The primary challenge was building real-time synchronization across multiple users while maintaining optimal performance and ensuring data consistency. Additionally, creating an intuitive workflow builder that could accommodate different team structures and work methodologies required extensive user research and iterative design.",
-    solution: "Implemented Supabase real-time subscriptions with optimistic updates and conflict resolution algorithms. Used React Query for intelligent caching and background synchronization. Built a drag-and-drop workflow builder using React DnD with custom validation logic for workflow dependencies.",
+    challenges: "Building a robust data management system that handles multiple data types while ensuring data integrity and validation. Creating an intuitive interface for non-technical users while maintaining powerful features for advanced operations.",
+    solution: "Implemented comprehensive form validation with React Hook Form, created reusable data table components with sorting and filtering, used TypeScript for type safety, and built a modular architecture for easy maintenance and scalability.",
     metrics: [
-      { label: "User Engagement", value: "85%", improvement: "+40% vs industry avg" },
-      { label: "Task Completion Rate", value: "92%", improvement: "+25% improvement" },
-      { label: "Load Time", value: "0.8s", improvement: "60% faster than competitors" },
-      { label: "Real-time Sync Latency", value: "<100ms", improvement: "99.9% reliability" }
+      { label: "Data Processing", value: "1000+ records", improvement: "Efficient handling" },
+      { label: "Response Time", value: "<2s", improvement: "Fast operations" },
+      { label: "User Satisfaction", value: "95%", improvement: "Intuitive interface" },
+      { label: "Uptime", value: "99.5%", improvement: "Reliable service" }
     ],
-    timeline: "3 months",
+    timeline: "2 months",
     teamSize: "Solo Developer",
-    clientType: "Personal Project / Portfolio",
+    clientType: "LGU Naga City",
     testimonial: {
-      quote: "TaskFlow Pro has revolutionized how our remote team collaborates. The real-time updates and intuitive interface have improved our productivity by 40%.",
-      author: "Sarah Johnson",
-      position: "Project Manager",
-      company: "TechStart Inc."
+      quote: "The CRUD application has streamlined our data management processes significantly. The interface is intuitive and the performance is excellent.",
+      author: "Municipal Staff",
+      position: "Data Manager",
+      company: "LGU Naga City"
     },
     technicalHighlights: [
-      "Real-time collaboration using Supabase WebSocket connections",
-      "Optimistic UI updates with automatic conflict resolution",
-      "Advanced state management with Zustand and React Query",
-      "Custom drag-and-drop workflow builder with TypeScript",
-      "Progressive Web App (PWA) capabilities for offline usage",
-      "Automated testing with Jest and React Testing Library"
+      "Full CRUD operations with comprehensive error handling",
+      "Advanced form validation and data integrity checks",
+      "Responsive design optimized for mobile and desktop",
+      "Efficient state management for real-time updates",
+      "Type-safe implementation with TypeScript",
+      "Deployed on Vercel with continuous integration"
     ],
     learnings: [
-      "Mastered real-time data synchronization patterns",
-      "Learned advanced TypeScript patterns for complex state management",
-      "Gained expertise in building intuitive drag-and-drop interfaces",
-      "Understood the importance of optimistic UI for perceived performance"
+      "Mastered complex form handling and validation patterns",
+      "Learned best practices for data management applications",
+      "Gained experience in building government-focused applications",
+      "Understood the importance of user experience in admin tools"
     ],
     futureEnhancements: [
-      "AI-powered task prioritization and suggestions",
-      "Integration with popular calendar and communication tools",
-      "Advanced reporting and business intelligence features",
-      "Mobile native apps for iOS and Android"
+      "Advanced analytics and reporting features",
+      "Bulk operations for data management",
+      "Integration with other municipal systems",
+      "Enhanced security and audit logging"
     ]
   },
   { 
     id: 2,
-    title: "ModernShop E-Commerce", 
-    desc: "Full-stack e-commerce platform with real-time inventory, payment processing, and comprehensive admin dashboard.",
-    longDesc: "A sophisticated e-commerce solution built from the ground up to handle modern online retail challenges. Features include dynamic inventory management, secure payment processing, advanced analytics, and a powerful admin dashboard for complete store management.",
-    tech: ["Next.js 15", "TypeScript", "PostgreSQL", "Stripe API", "Redis", "Node.js", "Prisma ORM", "NextAuth.js"],
-    category: "E-Commerce",
-    gradient: "from-emerald-500 to-teal-500",
-    link: "/modernshop",
-    githubLink: "https://github.com/jirehcustodio/ecommerce-platform",
+    title: "MyNaga CENRO System", 
+    desc: "Environmental and Natural Resources Office management system for tracking permits, applications, and environmental compliance.",
+    longDesc: "A specialized system built for LGU Naga's City Environment and Natural Resources Office (CENRO). This comprehensive platform manages environmental permits, applications, compliance tracking, and natural resource management with features tailored for environmental governance and monitoring.",
+    tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Database Integration", "Document Management"],
+    category: "Web App",
+    gradient: "from-green-500 to-emerald-600",
+    link: "https://mynaga-crud-app.vercel.app/cenro",
+    githubLink: "https://github.com/jirehcustodio/mynaga-crud-app",
     isLiveDemo: true,
-    demoUrl: "/modernshop",
-    image: "/projects/ecommerce-preview.jpg",
+    demoUrl: "https://mynaga-crud-app.vercel.app/cenro",
+    image: "/projects/cenro-preview.jpg",
     features: [
-      "Secure Payment Processing", 
-      "Real-time Inventory Management", 
-      "Advanced User Analytics", 
-      "Comprehensive Admin Dashboard",
-      "Shopping Cart Persistence",
-      "Order Tracking System",
-      "Customer Review System",
-      "SEO-Optimized Product Pages"
+      "Permit Application Management", 
+      "Environmental Compliance Tracking", 
+      "Document Management System", 
+      "Application Status Monitoring",
+      "Record Keeping & Archiving",
+      "Search & Filter Capabilities",
+      "Reporting & Analytics",
+      "User Role Management"
     ],
-    challenges: "Managing complex inventory states across multiple concurrent users while preventing overselling, implementing secure payment processing with proper error handling, and creating a scalable architecture that could handle traffic spikes during sales events.",
-    solution: "Implemented Redis for high-performance caching and session management, used database transactions for inventory management, integrated Stripe with comprehensive webhook handling for payment security, and employed horizontal scaling strategies with load balancing.",
+    challenges: "Creating a specialized system for environmental management that handles complex permit workflows, document management, and compliance tracking while being accessible to both staff and applicants.",
+    solution: "Developed a modular system with role-based access control, implemented document upload and management features, created intuitive workflows for permit processing, and built comprehensive reporting tools for environmental monitoring.",
     metrics: [
-      { label: "Conversion Rate", value: "12.5%", improvement: "+45% above industry avg" },
-      { label: "Page Load Speed", value: "1.2s", improvement: "50% faster than competitors" },
-      { label: "Zero Inventory Conflicts", value: "100%", improvement: "Eliminated overselling" },
-      { label: "Payment Success Rate", value: "99.7%", improvement: "Industry-leading reliability" }
+      { label: "Permits Processed", value: "500+", improvement: "Efficient workflow" },
+      { label: "Processing Time", value: "-40%", improvement: "Faster approvals" },
+      { label: "Document Accuracy", value: "98%", improvement: "Improved tracking" },
+      { label: "User Adoption", value: "90%", improvement: "High engagement" }
     ],
-    timeline: "4 months",
+    timeline: "3 months",
     teamSize: "Solo Developer",
-    clientType: "Freelance Client",
+    clientType: "LGU Naga City - CENRO",
     testimonial: {
-      quote: "The e-commerce platform exceeded our expectations. Sales increased by 60% in the first month, and customers love the smooth checkout experience.",
-      author: "Michael Chen",
-      position: "Business Owner",
-      company: "Artisan Crafts Co."
+      quote: "The CENRO system has revolutionized how we manage environmental permits and compliance. It's made our processes more transparent and efficient.",
+      author: "CENRO Staff",
+      position: "Environmental Officer",
+      company: "LGU Naga City"
     },
     technicalHighlights: [
-      "Advanced inventory management with race condition prevention",
-      "Secure payment processing with Stripe integration and webhooks",
-      "Redis caching for sub-second page load times",
-      "Prisma ORM with optimized database queries",
-      "Comprehensive error handling and logging system",
-      "SEO optimization with Next.js built-in features"
+      "Specialized workflow management for environmental permits",
+      "Document upload and management system with security",
+      "Role-based access control for different user types",
+      "Comprehensive search and filtering for records",
+      "Responsive design for field and office use",
+      "Integration with existing municipal systems"
     ],
     learnings: [
-      "Mastered complex e-commerce business logic and edge cases",
-      "Gained deep understanding of payment processing security",
-      "Learned advanced caching strategies for high-traffic applications",
-      "Understood the importance of comprehensive error handling"
+      "Gained expertise in building specialized government systems",
+      "Learned about environmental compliance and permit workflows",
+      "Mastered complex document management implementations",
+      "Understood the importance of audit trails in government applications"
     ],
     futureEnhancements: [
-      "Multi-vendor marketplace functionality",
-      "Advanced recommendation engine using machine learning",
-      "International shipping and multi-currency support",
-      "Mobile app development for iOS and Android"
+      "Mobile app for field inspections",
+      "Integration with GIS mapping systems",
+      "Automated compliance monitoring and alerts",
+      "Public portal for permit status checking"
     ]
   },
   { 
     id: 3,
-    title: "Analytics Pro Dashboard", 
-    desc: "Real-time business intelligence dashboard with interactive visualizations, live metrics, and comprehensive reporting.",
-    longDesc: "A professional-grade analytics dashboard designed for data-driven decision making. Features real-time data visualization, interactive charts, customizable KPI tracking, and comprehensive business intelligence tools that help organizations understand their performance metrics at a glance.",
-    tech: ["Next.js 15", "TypeScript", "Chart.js", "D3.js", "Tailwind CSS", "Framer Motion", "WebSocket", "PostgreSQL"],
+    title: "WAM Dashboard", 
+    desc: "Web Analytics & Monitoring dashboard for tracking website performance, user behavior, and comprehensive site metrics.",
+    longDesc: "A professional analytics and monitoring dashboard designed to provide comprehensive insights into website performance, user behavior, and site metrics. Features real-time data visualization, custom KPI tracking, and detailed reporting tools for data-driven decision making.",
+    tech: ["Next.js", "TypeScript", "Chart.js", "Tailwind CSS", "Analytics Integration", "Real-time Data"],
     category: "Dashboard",
-    gradient: "from-orange-500 to-red-500",
-    link: "/analytics",
-    githubLink: "https://github.com/jirehcustodio/analytics-dashboard",
+    gradient: "from-purple-500 to-indigo-600",
+    link: "https://wamdashboard.netlify.app/",
+    githubLink: "https://github.com/jirehcustodio/wam-dashboard",
     isLiveDemo: true,
-    demoUrl: "/analytics",
-    image: "/projects/analytics-preview.jpg",
+    demoUrl: "https://wamdashboard.netlify.app/",
+    image: "/projects/wam-preview.jpg",
     features: [
-      "Real-time Data Visualization", 
-      "Interactive Chart Library", 
-      "Live User Activity Tracking", 
+      "Real-time Analytics Tracking", 
+      "Interactive Data Visualizations", 
+      "Custom KPI Monitoring", 
+      "Performance Metrics Dashboard",
+      "User Behavior Analysis",
+      "Traffic Source Tracking",
       "Responsive Design",
-      "Custom KPI Widgets",
-      "Data Export Functionality",
-      "Customizable Dashboards",
-      "Performance Monitoring"
+      "Export & Reporting Tools"
     ],
-    challenges: "Creating smooth real-time updates without overwhelming the UI, handling large datasets efficiently while maintaining responsiveness, building reusable and customizable chart components, and ensuring consistent performance across different devices and browsers.",
-    solution: "Implemented Chart.js with custom optimization for real-time data streaming, used Web Workers for heavy data processing, created a modular component architecture for chart reusability, and employed efficient data pagination and virtualization techniques.",
+    challenges: "Creating a comprehensive analytics dashboard that provides actionable insights while maintaining performance with large datasets. Balancing detailed metrics with an intuitive, easy-to-understand interface for users of all technical levels.",
+    solution: "Implemented Chart.js for optimized data visualization, created modular dashboard components for customization, used efficient data aggregation techniques, and built an intuitive UI that presents complex data in an accessible format.",
     metrics: [
-      { label: "Data Processing Speed", value: "5M records/sec", improvement: "300% faster processing" },
-      { label: "Chart Render Time", value: "45ms", improvement: "85% performance improvement" },
-      { label: "Real-time Update Latency", value: "<50ms", improvement: "Near-instant updates" },
-      { label: "User Satisfaction", value: "94%", improvement: "Exceptional user experience" }
+      { label: "Data Points Processed", value: "10M+", improvement: "Scalable processing" },
+      { label: "Dashboard Load Time", value: "1.5s", improvement: "Fast performance" },
+      { label: "User Insights", value: "50+ metrics", improvement: "Comprehensive tracking" },
+      { label: "Client Satisfaction", value: "92%", improvement: "Highly rated" }
     ],
     timeline: "2.5 months",
     teamSize: "Solo Developer",
-    clientType: "Corporate Client",
+    clientType: "Business Analytics",
     testimonial: {
-      quote: "The analytics dashboard has transformed how we monitor our business. The real-time insights have helped us make faster, data-driven decisions.",
-      author: "Emily Rodriguez",
-      position: "Data Director",
-      company: "Growth Analytics Inc."
+      quote: "The WAM Dashboard has given us unprecedented visibility into our website performance. The insights have been invaluable for our optimization efforts.",
+      author: "Business Owner",
+      position: "CEO",
+      company: "Digital Marketing Agency"
     },
     technicalHighlights: [
-      "Real-time data streaming with WebSocket connections",
-      "Advanced Chart.js customizations and optimizations",
-      "Efficient data virtualization for large datasets",
-      "Custom React hooks for data management and caching",
-      "Responsive design with complex grid layouts",
-      "Performance monitoring and optimization techniques"
+      "Advanced Chart.js implementation for data visualization",
+      "Real-time data processing and updates",
+      "Modular dashboard architecture for customization",
+      "Efficient data aggregation and caching strategies",
+      "Responsive design optimized for all devices",
+      "Deployed on Netlify with continuous deployment"
     ],
     learnings: [
-      "Mastered data visualization best practices and user experience",
-      "Learned advanced performance optimization for data-heavy applications",
-      "Gained expertise in real-time data streaming architectures",
-      "Understood the importance of responsive design for dashboard applications"
+      "Mastered data visualization best practices",
+      "Learned efficient techniques for handling large datasets",
+      "Gained expertise in building analytical dashboards",
+      "Understood the importance of actionable insights presentation"
     ],
     futureEnhancements: [
-      "Machine learning-powered predictive analytics",
-      "Advanced filtering and drill-down capabilities",
-      "Integration with popular business intelligence tools",
-      "Automated report generation and scheduling"
+      "AI-powered predictive analytics",
+      "Custom alert and notification system",
+      "Integration with popular analytics platforms",
+      "Advanced filtering and drill-down capabilities"
     ]
   },
   {
