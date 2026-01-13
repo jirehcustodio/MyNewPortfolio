@@ -278,13 +278,24 @@ export default function About() {
               transition={{ delay: 1.5, duration: 0.6 }}
               className="pt-6"
             >
-              <motion.button
+              <motion.a
+                href="/resume.pdf"
+                download="Jireh_Custodio_Resume.pdf"
+                onClick={() => {
+                  // Track resume download in analytics
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'download_resume', {
+                      event_category: 'engagement',
+                      event_label: 'Resume Download'
+                    });
+                  }
+                }}
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)"
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full group px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl font-semibold text-white relative overflow-hidden"
+                className="w-full group px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl font-semibold text-white relative overflow-hidden flex items-center justify-center cursor-pointer"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -298,7 +309,7 @@ export default function About() {
                     ↓
                   </motion.span>
                 </span>
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </div>
