@@ -113,24 +113,20 @@ export default function FloatingShapes() {
           key={shape.id}
           className="absolute text-neutral-900"
           initial={{
-            x: `${shape.x}%`,
-            y: `${shape.y}%`,
+            left: `${shape.x}%`,
+            top: `${shape.y}%`,
             rotate: shape.rotation,
           }}
           animate={{
-            y: [`${shape.y}%`, `${shape.y - 20}%`, `${shape.y}%`],
+            top: [`${shape.y}%`, `${shape.y - 20}%`, `${shape.y}%`],
             rotate: [shape.rotation, shape.rotation + 180, shape.rotation + 360],
-            x: [`${shape.x}%`, `${shape.x + 5}%`, `${shape.x}%`],
+            left: [`${shape.x}%`, `${shape.x + 5}%`, `${shape.x}%`],
           }}
           transition={{
             duration: shape.duration,
             delay: shape.delay,
             repeat: Infinity,
             ease: "linear",
-          }}
-          style={{
-            left: 0,
-            top: 0,
           }}
         >
           {renderShape(shape)}
