@@ -10,28 +10,28 @@ const contactMethods = [
     title: "Email",
     value: "jireh4401@gmail.com",
     link: "mailto:jireh4401@gmail.com",
-    color: "from-blue-500 to-cyan-500"
+    color: "#b8814a"
   },
   {
     icon: FaPhone,
     title: "Phone",
     value: "09630030380",
     link: "tel:+639630030380",
-    color: "from-green-500 to-emerald-500"
+    color: "#b8814a"
   },
   {
     icon: FaLinkedin,
     title: "LinkedIn",
     value: "linkedin.com/in/jireh-custodio-19a492341",
     link: "https://www.linkedin.com/in/jireh-custodio-19a492341/",
-    color: "from-blue-600 to-blue-800"
+    color: "#b8814a"
   },
   {
     icon: FaGithub,
     title: "GitHub",
     value: "github.com/jirehcustodio",
     link: "https://github.com/jirehcustodio",
-    color: "from-purple-500 to-pink-500"
+    color: "#b8814a"
   }
 ];
 
@@ -55,10 +55,11 @@ export default function Contact() {
 
 
   return (
-    <section id="contact" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)] opacity-60" />
+    <section id="contact" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden bg-neutral-50">
+      {/* Minimal Background */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
@@ -72,23 +73,21 @@ export default function Contact() {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 bg-pink-500/10 border border-pink-500/20 rounded-full text-pink-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 bg-white border border-neutral-200 rounded-full text-neutral-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
           >
-            <span className="w-2 h-2 bg-pink-400 rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
             Let&apos;s Connect
           </motion.div>
           
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-              Get In Touch
-            </span>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2 text-neutral-900">
+            Get In Touch
           </h3>
           
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2"
+            className="text-base sm:text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed px-2"
           >
             Ready to bring your ideas to life? Let&apos;s collaborate and create something amazing together.
           </motion.p>
@@ -103,8 +102,8 @@ export default function Contact() {
             className="space-y-6 sm:space-y-8"
           >
             <div>
-              <h4 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Let&apos;s Start a Conversation</h4>
-              <p className="text-neutral-400 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+              <h4 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 sm:mb-6">Let&apos;s Start a Conversation</h4>
+              <p className="text-neutral-600 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
                 I&apos;m always interested in new opportunities and exciting projects. 
                 Whether you have a question or just want to say hi, feel free to reach out!
               </p>
@@ -119,10 +118,10 @@ export default function Contact() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ delay: 0.5 + (index * 0.1), duration: 0.5 }}
-                  className="group relative p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl backdrop-blur-sm overflow-hidden touch-manipulation"
+                  className="group relative p-3 sm:p-4 bg-white border border-neutral-200 rounded-xl sm:rounded-2xl overflow-hidden touch-manipulation shadow-sm"
                   whileHover={{ 
                     scale: 1.02,
-                    borderColor: "rgba(59, 130, 246, 0.3)"
+                    borderColor: "#b8814a"
                   }}
                   whileTap={{ scale: 0.98 }}
                   target={method.link.startsWith('http') ? '_blank' : undefined}
@@ -130,7 +129,7 @@ export default function Contact() {
                 >
                   <div className="flex items-center gap-3 sm:gap-4 relative z-10">
                     <motion.div
-                      className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${method.color} rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0`}
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-[#b8814a] rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
@@ -138,25 +137,14 @@ export default function Contact() {
                     </motion.div>
                     
                     <div className="min-w-0 flex-1">
-                      <h5 className="font-semibold text-white group-hover:text-blue-400 transition-colors text-sm sm:text-base">
+                      <h5 className="font-semibold text-neutral-900 group-hover:text-[#b8814a] transition-colors text-sm sm:text-base">
                         {method.title}
                       </h5>
-                      <p className="text-neutral-400 group-hover:text-neutral-300 transition-colors text-xs sm:text-sm truncate">
+                      <p className="text-neutral-600 group-hover:text-neutral-700 transition-colors text-xs sm:text-sm truncate">
                         {method.value}
                       </p>
                     </div>
                   </div>
-
-                  {/* Hover Effect */}
-                  <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-20"
-                    style={{
-                      background: `linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.3), transparent)`
-                    }}
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.6 }}
-                  />
                 </motion.a>
               ))}
             </div>
@@ -166,13 +154,13 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 1, duration: 0.6 }}
-              className="p-4 sm:p-6 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-pink-500/10 border border-blue-500/20 rounded-xl sm:rounded-2xl backdrop-blur-sm"
+              className="p-4 sm:p-6 bg-white border border-[#b8814a]/30 rounded-xl sm:rounded-2xl shadow-sm"
             >
-              <h5 className="font-semibold text-white mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
-                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <h5 className="font-semibold text-neutral-900 mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+                <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
                 Quick Response Time
               </h5>
-              <p className="text-neutral-400 text-xs sm:text-sm">
+              <p className="text-neutral-600 text-xs sm:text-sm">
                 I typically respond to messages within 24 hours. Looking forward to hearing from you!
               </p>
             </motion.div>
@@ -185,10 +173,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <form
-              className="space-y-4 sm:space-y-6 p-4 sm:p-6 lg:p-8 bg-neutral-800/30 border border-neutral-700/30 rounded-2xl sm:rounded-3xl backdrop-blur-sm"
-              style={{
-                boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)"
-              }}
+              className="space-y-4 sm:space-y-6 p-4 sm:p-6 lg:p-8 bg-white border border-neutral-200 rounded-2xl sm:rounded-3xl shadow-sm"
               action="https://formsubmit.co/jireh4401@gmail.com"
               method="POST"
             >
@@ -214,15 +199,15 @@ export default function Contact() {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('name')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 backdrop-blur-sm text-base"
+                  className="w-full p-3 sm:p-4 bg-neutral-50 border border-neutral-200 rounded-xl sm:rounded-2xl text-neutral-900 placeholder-neutral-500 focus:outline-none transition-all duration-300 text-base"
                   whileFocus={{ 
                     scale: 1.01,
-                    borderColor: "#60a5fa",
-                    boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)"
+                    borderColor: "#b8814a",
+                    boxShadow: "0 0 0 3px rgba(184, 129, 74, 0.1)"
                   }}
                 />
                 <motion.div
-                  className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2"
+                  className="h-1 bg-[#b8814a] rounded-full mt-2"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: focusedField === 'name' ? 1 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -245,15 +230,15 @@ export default function Contact() {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('email')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 backdrop-blur-sm text-base"
+                  className="w-full p-3 sm:p-4 bg-neutral-50 border border-neutral-200 rounded-xl sm:rounded-2xl text-neutral-900 placeholder-neutral-500 focus:outline-none transition-all duration-300 text-base"
                   whileFocus={{ 
                     scale: 1.01,
-                    borderColor: "#60a5fa",
-                    boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)"
+                    borderColor: "#b8814a",
+                    boxShadow: "0 0 0 3px rgba(184, 129, 74, 0.1)"
                   }}
                 />
                 <motion.div
-                  className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2"
+                  className="h-1 bg-[#b8814a] rounded-full mt-2"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: focusedField === 'email' ? 1 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -276,15 +261,15 @@ export default function Contact() {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('message')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-3 sm:p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-xl sm:rounded-2xl text-white placeholder-neutral-500 focus:outline-none transition-all duration-300 resize-none backdrop-blur-sm text-base"
+                  className="w-full p-3 sm:p-4 bg-neutral-50 border border-neutral-200 rounded-xl sm:rounded-2xl text-neutral-900 placeholder-neutral-500 focus:outline-none transition-all duration-300 resize-none text-base"
                   whileFocus={{ 
                     scale: 1.01,
-                    borderColor: "#60a5fa",
-                    boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)"
+                    borderColor: "#b8814a",
+                    boxShadow: "0 0 0 3px rgba(184, 129, 74, 0.1)"
                   }}
                 />
                 <motion.div
-                  className="h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2"
+                  className="h-1 bg-[#b8814a] rounded-full mt-2"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: focusedField === 'message' ? 1 : 0 }}
                   transition={{ duration: 0.3 }}
@@ -302,14 +287,11 @@ export default function Contact() {
                   type="submit"
                   whileHover={{ 
                     scale: 1.02,
-                    boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+                    boxShadow: "0 10px 30px rgba(184, 129, 74, 0.3)"
                   }}
                   whileTap={{ scale: 0.98 }}
-                  className="group w-full px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white relative overflow-hidden transition-all duration-300 text-base touch-manipulation bg-gradient-to-r from-blue-500 to-purple-600"
+                  className="group w-full px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-white relative overflow-hidden transition-all duration-300 text-base touch-manipulation bg-[#b8814a] hover:bg-[#a07241]"
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     Send Message
                     <motion.span
@@ -319,16 +301,6 @@ export default function Contact() {
                       →
                     </motion.span>
                   </span>
-                  
-                  {/* Ripple Effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-white/10 rounded-2xl opacity-0"
-                    whileHover={{ 
-                      opacity: [0, 0.2, 0],
-                      scale: [1, 1.05, 1.02]
-                    }}
-                    transition={{ duration: 0.6 }}
-                  />
                 </motion.button>
               </motion.div>
             </form>
