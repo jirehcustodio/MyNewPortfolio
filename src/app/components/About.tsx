@@ -72,9 +72,9 @@ export default function About() {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-neutral-200 rounded-full text-neutral-700 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#b8814a]/30 rounded-full text-neutral-700 text-sm font-medium mb-6"
           >
-            <span className="w-2 h-2 bg-neutral-900 rounded-full" />
+            <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
             About Me
           </motion.div>
           
@@ -291,14 +291,11 @@ export default function About() {
                 }}
                 whileHover={{ 
                   scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)"
+                  boxShadow: "0 10px 30px rgba(184, 129, 74, 0.3)"
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full group px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl font-semibold text-white relative overflow-hidden flex items-center justify-center cursor-pointer"
+                className="w-full group px-6 py-4 bg-[#b8814a] hover:bg-[#a07241] rounded-2xl font-semibold text-white relative overflow-hidden flex items-center justify-center cursor-pointer transition-colors"
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   📄 Download Resume
                   <motion.span

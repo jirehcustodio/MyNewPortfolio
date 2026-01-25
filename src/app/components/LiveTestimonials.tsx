@@ -62,12 +62,12 @@ export default function LiveTestimonials() {
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-gradient-to-br from-neutral-900 via-blue-900/20 to-purple-900/20">
+      <section className="py-16 bg-neutral-50">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="animate-pulse">
-              <div className="h-8 bg-neutral-700 rounded w-64 mx-auto mb-4"></div>
-              <div className="h-4 bg-neutral-700 rounded w-96 mx-auto"></div>
+              <div className="h-8 bg-neutral-200 rounded w-64 mx-auto mb-4"></div>
+              <div className="h-4 bg-neutral-200 rounded w-96 mx-auto"></div>
             </div>
           </div>
         </div>
@@ -76,9 +76,11 @@ export default function LiveTestimonials() {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-neutral-900 via-blue-900/20 to-purple-900/20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(59,130,246,0.1),transparent_50%)] opacity-60" />
+    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+      {/* Minimal Background */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      </div>
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
@@ -94,19 +96,17 @@ export default function LiveTestimonials() {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-sm font-medium mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#b8814a]/30 rounded-full text-neutral-700 text-sm font-medium mb-6"
           >
-            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
             Live Testimonials
           </motion.div>
           
-          <h2 className="text-3xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-              What Clients Say
-            </span>
+          <h2 className="text-3xl lg:text-5xl font-bold mb-6 text-neutral-900">
+            What Clients Say
           </h2>
           
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
             Real testimonials from real clients, updated in real-time. 
             Join the conversation and share your experience!
           </p>
@@ -115,7 +115,7 @@ export default function LiveTestimonials() {
         {testimonials.length > 0 ? (
           <div className="max-w-4xl mx-auto">
             {/* Testimonial Carousel */}
-            <div className="relative bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-3xl p-8 lg:p-12 mb-8">
+            <div className="relative bg-white border border-neutral-200 rounded-3xl p-8 lg:p-12 mb-8 shadow-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentIndex}
@@ -126,10 +126,10 @@ export default function LiveTestimonials() {
                   className="text-center"
                 >
                   {/* Quote Icon */}
-                  <FaQuoteLeft className="text-4xl text-blue-400/30 mx-auto mb-6" />
+                  <FaQuoteLeft className="text-4xl text-[#b8814a]/30 mx-auto mb-6" />
                   
                   {/* Testimonial Text */}
-                  <blockquote className="text-xl lg:text-2xl text-neutral-200 leading-relaxed mb-8 font-light">
+                  <blockquote className="text-xl lg:text-2xl text-neutral-700 leading-relaxed mb-8 font-light">
                     &ldquo;{testimonials[currentIndex].testimonial}&rdquo;
                   </blockquote>
                   
@@ -140,10 +140,10 @@ export default function LiveTestimonials() {
                   
                   {/* Author Info */}
                   <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
+                    <div className="w-16 h-16 bg-[#b8814a] rounded-full flex items-center justify-center text-white font-bold text-xl mb-4">
                       {testimonials[currentIndex].name.charAt(0).toUpperCase()}
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-1">
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-1">
                       {testimonials[currentIndex].name}
                     </h3>
                     {testimonials[currentIndex].position && testimonials[currentIndex].company && (
@@ -152,7 +152,7 @@ export default function LiveTestimonials() {
                       </p>
                     )}
                     {testimonials[currentIndex].project_type && (
-                      <p className="text-blue-400 text-sm mt-2">
+                      <p className="text-[#b8814a] text-sm mt-2">
                         Project: {testimonials[currentIndex].project_type}
                       </p>
                     )}
@@ -165,13 +165,13 @@ export default function LiveTestimonials() {
                 <>
                   <button
                     onClick={prevTestimonial}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-neutral-700/50 hover:bg-neutral-600/50 border border-neutral-600/50 rounded-full flex items-center justify-center text-white transition-colors"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white border border-neutral-300 hover:border-neutral-900 rounded-full flex items-center justify-center text-neutral-900 transition-colors shadow-sm"
                   >
                     <FaArrowLeft className="w-4 h-4" />
                   </button>
                   <button
                     onClick={nextTestimonial}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-neutral-700/50 hover:bg-neutral-600/50 border border-neutral-600/50 rounded-full flex items-center justify-center text-white transition-colors"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white border border-neutral-300 hover:border-neutral-900 rounded-full flex items-center justify-center text-neutral-900 transition-colors shadow-sm"
                   >
                     <FaArrowRight className="w-4 h-4" />
                   </button>
@@ -187,7 +187,7 @@ export default function LiveTestimonials() {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentIndex ? 'bg-blue-400' : 'bg-neutral-600'
+                      index === currentIndex ? 'bg-[#b8814a]' : 'bg-neutral-300'
                     }`}
                   />
                 ))}
@@ -195,7 +195,7 @@ export default function LiveTestimonials() {
             )}
           </div>
         ) : (
-          <div className="text-center text-neutral-400 mb-8">
+          <div className="text-center text-neutral-600 mb-8">
             <p className="text-lg">No testimonials yet. Be the first to share your experience!</p>
           </div>
         )}
@@ -206,7 +206,7 @@ export default function LiveTestimonials() {
             onClick={() => setShowSubmissionForm(true)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#b8814a] hover:bg-[#a07241] text-white font-semibold rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
           >
             <FaPlus className="w-4 h-4" />
             Share Your Experience
@@ -222,7 +222,7 @@ export default function LiveTestimonials() {
             <p className="text-neutral-500">
               Showing {currentIndex + 1} of {testimonials.length} testimonials
               {testimonials.length > 0 && (
-                <span className="text-green-400 ml-2">
+                <span className="text-[#b8814a] ml-2">
                   • Live updates enabled
                 </span>
               )}

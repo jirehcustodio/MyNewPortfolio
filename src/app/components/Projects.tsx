@@ -585,14 +585,11 @@ export default function Projects() {
           <motion.button
             whileHover={{ 
               scale: 1.05,
-              boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)"
+              boxShadow: "0 10px 30px rgba(184, 129, 74, 0.3)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl font-semibold text-white relative overflow-hidden"
+            className="group px-8 py-4 bg-[#b8814a] hover:bg-[#a07241] rounded-2xl font-semibold text-white relative overflow-hidden transition-colors"
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
             <span className="relative z-10 flex items-center gap-2">
               View All Projects
               <motion.span
