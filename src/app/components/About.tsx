@@ -54,10 +54,11 @@ export default function About() {
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
 
   return (
-    <section id="about" className="relative py-20 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 via-neutral-900 to-neutral-800" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(147,51,234,0.1),transparent_50%)] opacity-60" />
+    <section id="about" className="relative py-20 lg:py-32 overflow-hidden bg-neutral-50">
+      {/* Minimal Background */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
@@ -71,16 +72,14 @@ export default function About() {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full text-green-400 text-sm font-medium mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-neutral-200 rounded-full text-neutral-700 text-sm font-medium mb-6"
           >
-            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-neutral-900 rounded-full" />
             About Me
           </motion.div>
           
-          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-white via-purple-100 to-pink-200 bg-clip-text text-transparent">
-              My Story
-            </span>
+          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-neutral-900">
+            My Story
           </h3>
         </motion.div>
 
@@ -94,20 +93,20 @@ export default function About() {
           >
             {/* Story */}
             <div className="space-y-6">
-              <p className="text-neutral-300 text-lg lg:text-xl leading-relaxed">
-                Hello! I&apos;m <span className="text-blue-400 font-semibold">Jireh Custodio</span>, 
+              <p className="text-neutral-700 text-lg lg:text-xl leading-relaxed">
+                Hello! I&apos;m <span className="text-neutral-900 font-semibold">Jireh Custodio</span>, 
                 a detail-oriented Computer Engineering graduate from Naga City, Philippines, with expertise 
                 spanning cloud computing, cybersecurity, web development, and multimedia production.
               </p>
               
-              <p className="text-neutral-400 text-base lg:text-lg leading-relaxed">
+              <p className="text-neutral-600 text-base lg:text-lg leading-relaxed">
                 My professional journey includes serving as an IT Support Engineer at LGU Naga City, 
                 where I supported cloud-based system deployments and maintained secure public digital 
                 infrastructure. As a certified Cloud System Analyst and Safety Officer, I bring a unique 
                 blend of technical depth and safety management expertise.
               </p>
 
-              <p className="text-neutral-400 text-base lg:text-lg leading-relaxed">
+              <p className="text-neutral-600 text-base lg:text-lg leading-relaxed">
                 For over 3 years as a freelance developer and multimedia specialist, I&apos;ve helped 
                 creatives and small businesses build compelling websites and multimedia solutions. 
                 I thrive in fast-paced, innovation-driven environments where technology meets creativity.
@@ -125,11 +124,11 @@ export default function About() {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                     transition={{ delay: 0.8 + (index * 0.1), duration: 0.3 }}
-                    className="px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium backdrop-blur-sm"
+                    className="px-4 py-2 bg-white border border-neutral-200 rounded-full text-neutral-700 text-sm font-medium"
                     whileHover={{ 
                       scale: 1.05,
-                      backgroundColor: "rgba(59, 130, 246, 0.2)",
-                      borderColor: "rgba(59, 130, 246, 0.4)"
+                      backgroundColor: "rgba(0, 0, 0, 0.04)",
+                      borderColor: "rgba(0, 0, 0, 0.2)"
                     }}
                   >
                     {trait}
@@ -145,7 +144,7 @@ export default function About() {
               transition={{ delay: 0.8, duration: 0.6 }}
               className="space-y-6"
             >
-              <h4 className="text-2xl font-bold text-white mb-6">Experience</h4>
+              <h4 className="text-2xl font-bold text-neutral-900 mb-6">Experience</h4>
               
               <div className="space-y-4">
                 {experiences.map((exp, index) => (
@@ -154,20 +153,20 @@ export default function About() {
                     initial={{ opacity: 0, x: -30 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                     transition={{ delay: 1 + (index * 0.1), duration: 0.5 }}
-                    className="group relative pl-8 border-l-2 border-neutral-700 hover:border-blue-400 transition-colors duration-300"
+                    className="group relative pl-8 border-l-2 border-neutral-200 hover:border-neutral-900 transition-colors duration-300"
                     whileHover={{ x: 5 }}
                   >
                     <motion.div
-                      className="absolute -left-2 top-2 w-4 h-4 bg-blue-500 rounded-full"
+                      className="absolute -left-2 top-2 w-4 h-4 bg-neutral-900 rounded-full"
                       whileHover={{ scale: 1.3 }}
                       transition={{ type: "spring", stiffness: 400 }}
                     />
                     <div className="pb-4">
-                      <h5 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
+                      <h5 className="text-lg font-semibold text-neutral-900 transition-colors">
                         {exp.role}
                       </h5>
-                      <p className="text-blue-400 font-medium">{exp.company}</p>
-                      <p className="text-neutral-400 text-sm">{exp.duration}</p>
+                      <p className="text-neutral-700 font-medium">{exp.company}</p>
+                      <p className="text-neutral-500 text-sm">{exp.duration}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -183,7 +182,7 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-8"
           >
-            <h4 className="text-2xl font-bold text-white">Technical Skills</h4>
+            <h4 className="text-2xl font-bold text-neutral-900">Technical Skills</h4>
             
             <div className="grid gap-4">
               {skills.map((skill, index) => (
@@ -198,10 +197,10 @@ export default function About() {
                 >
                   {/* Skill Item */}
                   <motion.div
-                    className="relative p-4 bg-neutral-800/50 border border-neutral-700/50 rounded-2xl backdrop-blur-sm overflow-hidden"
+                    className="relative p-4 bg-white border border-neutral-200 rounded-xl overflow-hidden"
                     whileHover={{ 
                       scale: 1.02,
-                      borderColor: "rgba(59, 130, 246, 0.3)"
+                      borderColor: "rgba(0, 0, 0, 0.3)"
                     }}
                     transition={{ duration: 0.2 }}
                   >
@@ -209,7 +208,7 @@ export default function About() {
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <motion.span
-                          className="text-xl"
+                          className="text-xl text-neutral-700"
                           animate={{ 
                             rotate: hoveredSkill === index ? [0, -10, 10, -10, 0] : 0 
                           }}
@@ -217,10 +216,10 @@ export default function About() {
                         >
                           <skill.icon className="w-5 h-5" />
                         </motion.span>
-                        <span className="font-semibold text-white">{skill.name}</span>
+                        <span className="font-semibold text-neutral-900">{skill.name}</span>
                       </div>
                       <motion.span
-                        className="text-sm font-bold text-blue-400"
+                        className="text-sm font-bold text-neutral-900"
                         animate={{ 
                           scale: hoveredSkill === index ? 1.1 : 1 
                         }}
@@ -230,9 +229,9 @@ export default function About() {
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="relative h-2 bg-neutral-700 rounded-full overflow-hidden">
+                    <div className="relative h-2 bg-neutral-100 rounded-full overflow-hidden">
                       <motion.div
-                        className={`h-full bg-gradient-to-r ${skill.color} rounded-full relative`}
+                        className="h-full bg-neutral-900 rounded-full relative"
                         initial={{ width: 0 }}
                         animate={isSkillsInView ? { width: `${skill.level}%` } : { width: 0 }}
                         transition={{ 

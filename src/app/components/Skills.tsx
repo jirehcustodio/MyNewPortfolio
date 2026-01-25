@@ -406,10 +406,11 @@ export default function Skills() {
   );
 
   return (
-    <section id="skills" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800/50 to-neutral-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(59,130,246,0.1),transparent_50%)] opacity-60" />
+    <section id="skills" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden bg-white">
+      {/* Minimal Background */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
@@ -423,23 +424,21 @@ export default function Skills() {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-neutral-50 border border-neutral-200 rounded-full text-neutral-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
           >
-            <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-neutral-900 rounded-full" />
             Technical Expertise
           </motion.div>
           
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-              Skills & Technologies
-            </span>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2 text-neutral-900">
+            Skills & Technologies
           </h3>
           
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2 mb-8"
+            className="text-base sm:text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed px-2 mb-8"
           >
             A comprehensive overview of my technical skills, tools, and technologies. 
             From frontend frameworks to backend systems, I build end-to-end solutions.
@@ -452,21 +451,21 @@ export default function Skills() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
           >
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-1">{totalSkills}</div>
-              <div className="text-sm text-neutral-400">Skills</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">{totalSkills}</div>
+              <div className="text-sm text-neutral-500">Skills</div>
             </div>
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">{skillCategories.length}</div>
-              <div className="text-sm text-neutral-400">Categories</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">{skillCategories.length}</div>
+              <div className="text-sm text-neutral-500">Categories</div>
             </div>
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-1">{averageLevel}%</div>
-              <div className="text-sm text-neutral-400">Avg Proficiency</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">{averageLevel}%</div>
+              <div className="text-sm text-neutral-500">Avg Proficiency</div>
             </div>
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-1">5+</div>
-              <div className="text-sm text-neutral-400">Years Experience</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">5+</div>
+              <div className="text-sm text-neutral-500">Years Experience</div>
             </div>
           </motion.div>
         </motion.div>
@@ -489,10 +488,10 @@ export default function Skills() {
                 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm text-sm sm:text-base ${
+                className={`flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 text-sm sm:text-base ${
                   selectedCategory === index
-                    ? `bg-gradient-to-r ${category.gradient} text-white border border-white/20`
-                    : 'bg-neutral-800/50 text-neutral-300 border border-neutral-700/50 hover:border-blue-400/50 hover:text-blue-400'
+                    ? 'bg-neutral-900 text-white border border-neutral-900'
+                    : 'bg-white text-neutral-700 border border-neutral-200 hover:border-neutral-900 hover:text-neutral-900'
                 }`}
               >
                 <IconComponent className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -516,14 +515,14 @@ export default function Skills() {
             variants={categoryVariants}
             className="text-center mb-8 sm:mb-12"
           >
-            <div className={`inline-flex items-center gap-3 mb-4 text-2xl sm:text-3xl font-bold ${skillCategories[selectedCategory].color}`}>
+            <div className="inline-flex items-center gap-3 mb-4 text-2xl sm:text-3xl font-bold text-neutral-900">
               {(() => {
                 const IconComponent = skillCategories[selectedCategory].icon;
                 return <IconComponent className="w-6 h-6 sm:w-8 sm:h-8" />;
               })()}
               {skillCategories[selectedCategory].name}
             </div>
-            <p className="text-neutral-400 max-w-2xl mx-auto">
+            <p className="text-neutral-600 max-w-2xl mx-auto">
               {selectedCategory === 0 && "Building modern, responsive, and performant user interfaces"}
               {selectedCategory === 1 && "Server-side development and API architecture"}
               {selectedCategory === 2 && "Data storage, management, and optimization"}
@@ -540,19 +539,19 @@ export default function Skills() {
                 <motion.div
                   key={skill.name}
                   variants={skillVariants}
-                  className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-2xl p-4 sm:p-6 hover:border-blue-400/30 transition-all duration-300 group"
+                  className="bg-white border border-neutral-200 rounded-xl p-4 sm:p-6 hover:border-neutral-900 transition-all duration-300 group"
                   onHoverStart={() => setHoveredSkill(skill.name)}
                   onHoverEnd={() => setHoveredSkill(null)}
                   whileHover={{ y: -4 }}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 sm:p-3 bg-gradient-to-r ${skillCategories[selectedCategory].gradient} rounded-xl`}>
-                        <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                      <div className="p-2 sm:p-3 bg-neutral-100 rounded-xl">
+                        <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-900" />
                       </div>
                       <div>
-                        <h4 className="text-lg sm:text-xl font-semibold text-white">{skill.name}</h4>
-                        <div className="flex items-center gap-3 text-sm text-neutral-400">
+                        <h4 className="text-lg sm:text-xl font-semibold text-neutral-900">{skill.name}</h4>
+                        <div className="flex items-center gap-3 text-sm text-neutral-600">
                           <span>{skill.experience}</span>
                           <span>•</span>
                           <span>{skill.projects} projects</span>
@@ -560,16 +559,16 @@ export default function Skills() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl sm:text-3xl font-bold text-blue-400">{skill.level}%</div>
+                      <div className="text-2xl sm:text-3xl font-bold text-neutral-900">{skill.level}%</div>
                       <div className="text-xs text-neutral-500">Proficiency</div>
                     </div>
                   </div>
 
                   {/* Progress Bar */}
                   <div className="mb-4">
-                    <div className="w-full bg-neutral-700/50 rounded-full h-2 sm:h-3 overflow-hidden">
+                    <div className="w-full bg-neutral-100 rounded-full h-2 sm:h-3 overflow-hidden">
                       <motion.div
-                        className={`h-full bg-gradient-to-r ${skillCategories[selectedCategory].gradient} rounded-full`}
+                        className="h-full bg-neutral-900 rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
                         transition={{ delay: 0.2 + index * 0.1, duration: 1, ease: "easeOut" }}
@@ -578,17 +577,9 @@ export default function Skills() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
                     {skill.description}
                   </p>
-
-                  {/* Hover Effect */}
-                  <motion.div
-                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: `linear-gradient(45deg, transparent, ${skillCategories[selectedCategory].gradient.includes('blue') ? 'rgba(59, 130, 246, 0.05)' : 'rgba(147, 51, 234, 0.05)'}, transparent)`,
-                    }}
-                  />
                 </motion.div>
               );
             })}
@@ -605,18 +596,15 @@ export default function Skills() {
           <motion.div
             whileHover={{ 
               scale: 1.05,
-              boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)"
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)"
             }}
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
             <a
               href="#contact"
-              className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl font-semibold text-white relative overflow-hidden"
+              className="group px-8 py-4 bg-neutral-900 hover:bg-neutral-800 rounded-xl font-semibold text-white relative overflow-hidden transition-colors"
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
               <span className="relative z-10 flex items-center gap-2">
                 Let&apos;s Work Together
                 <motion.span
@@ -628,7 +616,7 @@ export default function Skills() {
               </span>
             </a>
           </motion.div>
-          <p className="text-neutral-400 text-sm mt-4">
+          <p className="text-neutral-500 text-sm mt-4">
             Ready to bring your project to life with these technologies
           </p>
         </motion.div>
