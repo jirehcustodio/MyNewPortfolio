@@ -38,12 +38,12 @@ export default function FloatingShapes() {
   }, []);
 
   const renderShape = (shape: Shape) => {
-    const baseClasses = "absolute opacity-[0.03] pointer-events-none";
+    const baseClasses = "absolute opacity-[0.15] pointer-events-none";
     
     switch (shape.type) {
       case 'code':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <polyline points="16 18 22 12 16 6" />
             <polyline points="8 6 2 12 8 18" />
           </svg>
@@ -51,7 +51,7 @@ export default function FloatingShapes() {
       
       case 'bracket':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <path d="M16 3h3v18h-3M8 3H5v18h3" />
           </svg>
         );
@@ -59,13 +59,13 @@ export default function FloatingShapes() {
       case 'semicolon':
         return (
           <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" className={baseClasses}>
-            <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="20" fill="currentColor" fontFamily="monospace">;</text>
+            <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="22" fill="currentColor" fontFamily="monospace" fontWeight="bold">;</text>
           </svg>
         );
       
       case 'cube':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
             <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
             <line x1="12" y1="22.08" x2="12" y2="12" />
@@ -74,28 +74,28 @@ export default function FloatingShapes() {
       
       case 'triangle':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <polygon points="12 2 2 22 22 22" />
           </svg>
         );
       
       case 'circle':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <circle cx="12" cy="12" r="10" />
           </svg>
         );
       
       case 'slash':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <line x1="4" y1="20" x2="20" y2="4" />
           </svg>
         );
       
       case 'tag':
         return (
-          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={baseClasses}>
+          <svg width={shape.size} height={shape.size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={baseClasses}>
             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
             <line x1="7" y1="7" x2="7.01" y2="7" />
           </svg>
