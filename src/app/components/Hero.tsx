@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import FloatingShapes from "./FloatingShapes";
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -41,6 +42,9 @@ export default function Hero() {
       style={{ opacity }}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white"
     >
+      {/* Floating Shapes Background */}
+      <FloatingShapes />
+      
       {/* Minimal Background */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
