@@ -61,7 +61,7 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? "bg-neutral-900/80 backdrop-blur-md border-b border-neutral-800/50" 
+          ? "bg-white/80 backdrop-blur-md border-b border-neutral-200" 
           : "bg-transparent"
       }`}
     >
@@ -74,7 +74,7 @@ export default function Navbar() {
             className="cursor-pointer"
             onClick={() => handleNavClick('#hero')}
           >
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-500">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-neutral-900">
               Jireh.dev
             </h1>
           </motion.div>
@@ -92,14 +92,14 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + (index * 0.1), duration: 0.6 }}
-                className={`relative px-4 py-2 rounded-xl text-sm lg:text-base font-medium transition-all duration-300 ${
+                className={`relative px-4 py-2 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 ${
                   activeSection === item.href.slice(1)
-                    ? "text-blue-400"
-                    : "text-neutral-300 hover:text-white"
+                    ? "text-neutral-900"
+                    : "text-neutral-600 hover:text-neutral-900"
                 }`}
                 whileHover={{ 
                   scale: 1.05,
-                  backgroundColor: "rgba(59, 130, 246, 0.1)"
+                  backgroundColor: "rgba(0, 0, 0, 0.04)"
                 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -109,7 +109,7 @@ export default function Navbar() {
                 {activeSection === item.href.slice(1) && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute inset-0 bg-blue-500/10 border border-blue-500/20 rounded-xl"
+                    className="absolute inset-0 bg-neutral-100 border border-neutral-200 rounded-lg"
                     initial={false}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
@@ -139,14 +139,11 @@ export default function Navbar() {
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)"
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)"
               }}
               whileTap={{ scale: 0.95 }}
-              className="ml-4 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl text-sm lg:text-base font-semibold text-white relative overflow-hidden group"
+              className="ml-4 px-6 py-2 bg-neutral-900 hover:bg-neutral-800 rounded-lg text-sm lg:text-base font-medium text-white transition-colors"
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
               <span className="relative z-10">{t.hero.cta.contact}</span>
             </motion.a>
           </div>
@@ -159,7 +156,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2.5 rounded-lg bg-neutral-800/50 border border-neutral-700/50 backdrop-blur-sm touch-manipulation active:bg-neutral-700/50"
+            className="md:hidden p-2.5 rounded-lg bg-neutral-50 border border-neutral-200 touch-manipulation active:bg-neutral-100"
           >
             <motion.div
               animate={isMobileMenuOpen ? "open" : "closed"}
@@ -170,21 +167,21 @@ export default function Navbar() {
                   closed: { rotate: 0, y: 0 },
                   open: { rotate: 45, y: 6 }
                 }}
-                className="absolute w-6 h-0.5 bg-white top-1 origin-center"
+                className="absolute w-6 h-0.5 bg-neutral-900 top-1 origin-center"
               />
               <motion.span
                 variants={{
                   closed: { opacity: 1 },
                   open: { opacity: 0 }
                 }}
-                className="absolute w-6 h-0.5 bg-white top-3 origin-center"
+                className="absolute w-6 h-0.5 bg-neutral-900 top-3 origin-center"
               />
               <motion.span
                 variants={{
                   closed: { rotate: 0, y: 0 },
                   open: { rotate: -45, y: -6 }
                 }}
-                className="absolute w-6 h-0.5 bg-white top-5 origin-center"
+                className="absolute w-6 h-0.5 bg-neutral-900 top-5 origin-center"
               />
             </motion.div>
           </motion.button>
@@ -212,7 +209,7 @@ export default function Navbar() {
               }
             }
           }}
-          className="md:hidden overflow-hidden bg-neutral-900/95 backdrop-blur-md border-t border-neutral-800/50"
+          className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md border-t border-neutral-200"
         >
           <div className="py-4 sm:py-6 space-y-1 sm:space-y-2">
             {navItems.map((item, index) => (
@@ -236,10 +233,10 @@ export default function Navbar() {
                     opacity: 0
                   }
                 }}
-                className={`block px-4 py-3 rounded-lg sm:rounded-xl text-base font-medium transition-all duration-300 touch-manipulation active:scale-95 ${
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 touch-manipulation active:scale-95 ${
                   activeSection === item.href.slice(1)
-                    ? "text-blue-400 bg-blue-500/10 border border-blue-500/20"
-                    : "text-neutral-300 hover:text-white hover:bg-neutral-800/50 active:bg-neutral-800/70"
+                    ? "text-neutral-900 bg-neutral-100 border border-neutral-200"
+                    : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 active:bg-neutral-100"
                 }`}
                 whileTap={{ scale: 0.95 }}
               >

@@ -13,9 +13,10 @@ export default function LoadingSplash({ onComplete }: LoadingSplashProps) {
   const controls = useAnimation();
 
   const loadingTexts = [
-    "Loading...",
-    "Preparing content...",
-    "Almost there...",
+    "Initializing...",
+    "Loading experiences...",
+    "Preparing showcase...",
+    "Almost ready...",
   ];
 
   const logoVariants = {
@@ -168,27 +169,27 @@ export default function LoadingSplash({ onComplete }: LoadingSplashProps) {
           className="mb-8"
         >
           <motion.div
-            className="w-20 h-20 mx-auto mb-6 relative"
+            className="w-16 h-16 mx-auto mb-6 relative"
             animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute inset-0 border-4 border-blue-500/30 rounded-full"></div>
+            <div className="absolute inset-0 border border-neutral-700 rounded-full"></div>
             <motion.div 
-              className="absolute inset-4 bg-blue-500 rounded-full"
+              className="absolute inset-2 bg-neutral-100 rounded-full"
               animate={{ 
-                opacity: [0.5, 1, 0.5]
+                opacity: [0.3, 0.6, 0.3]
               }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </motion.div>
 
           <motion.h1
-            className="text-4xl font-bold text-blue-500"
+            className="text-4xl font-bold text-neutral-100"
           >
-            Jireh Custodio
+            JiDevPortfolio
           </motion.h1>
-          <motion.p className="text-neutral-400 mt-2">
-            Full-Stack Developer
+          <motion.p className="text-neutral-500 mt-2 text-sm tracking-wide font-light">
+            2026 • Full-Stack Developer
           </motion.p>
         </motion.div>
 
@@ -220,9 +221,9 @@ export default function LoadingSplash({ onComplete }: LoadingSplashProps) {
             </motion.span>
           </div>
           
-          <div className="w-full bg-neutral-800 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-neutral-800 rounded-full h-1 overflow-hidden relative">
             <motion.div
-              className="h-full bg-blue-500 rounded-full"
+              className="h-full bg-neutral-100 rounded-full"
               variants={progressBarVariants}
               initial="initial"
               animate="loading"
@@ -250,26 +251,16 @@ export default function LoadingSplash({ onComplete }: LoadingSplashProps) {
         </div>
       </div>
 
-      {/* Corner Accents */}
+      {/* Minimal Corner Accents */}
       <motion.div
-        className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-blue-400/30"
-        animate={{ opacity: [0.3, 1, 0.3] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute top-6 left-6 w-12 h-12 border-l border-t border-neutral-700"
+        animate={{ opacity: [0.2, 0.5, 0.2] }}
+        transition={{ duration: 3, repeat: Infinity }}
       />
       <motion.div
-        className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-purple-400/30"
-        animate={{ opacity: [0.3, 1, 0.3] }}
-        transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-      />
-      <motion.div
-        className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-pink-400/30"
-        animate={{ opacity: [0.3, 1, 0.3] }}
-        transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-      />
-      <motion.div
-        className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-blue-400/30"
-        animate={{ opacity: [0.3, 1, 0.3] }}
-        transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+        className="absolute bottom-6 right-6 w-12 h-12 border-r border-b border-neutral-700"
+        animate={{ opacity: [0.2, 0.5, 0.2] }}
+        transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
       />
     </motion.div>
   );
