@@ -68,8 +68,9 @@ export default function Hero() {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-neutral-50 border border-neutral-200 rounded-full text-neutral-700 text-xs sm:text-sm font-medium"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-neutral-50 border border-[#b8814a]/30 rounded-full text-neutral-700 text-xs sm:text-sm font-medium"
             >
+              <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
               <span className="hidden sm:inline">Available for opportunities</span>
               <span className="sm:hidden">Available</span>
             </motion.div>
@@ -86,7 +87,7 @@ export default function Hero() {
               {/* Subtitle */}
               <motion.div
                 variants={itemVariants}
-                className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-neutral-600 font-light"
+                className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-[#b8814a] font-light"
               >
                 Full-Stack Developer
               </motion.div>
@@ -95,7 +96,7 @@ export default function Hero() {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg lg:text-xl text-neutral-500 max-w-2xl leading-relaxed px-2 lg:px-0"
+              className="text-base sm:text-lg lg:text-xl text-neutral-600 max-w-2xl leading-relaxed px-2 lg:px-0"
             >
               Building robust web applications with modern technologies. 
               Specializing in <span className="text-neutral-900 font-medium">Next.js</span>, {" "}

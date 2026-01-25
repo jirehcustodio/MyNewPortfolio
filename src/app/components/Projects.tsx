@@ -88,10 +88,11 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800/50 to-neutral-900" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)] opacity-60" />
+    <section id="projects" className="relative py-12 sm:py-16 lg:py-32 overflow-hidden bg-white">
+      {/* Minimal Background */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
@@ -105,23 +106,21 @@ export default function Projects() {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs sm:text-sm font-medium mb-4 sm:mb-6 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-neutral-50 border border-neutral-200 rounded-full text-neutral-700 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
           >
-            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
             Recent Work
           </motion.div>
           
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
-            <span className="bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-              Featured Projects
-            </span>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2 text-neutral-900">
+            Featured Projects
           </h3>
           
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-base sm:text-lg lg:text-xl text-neutral-400 max-w-3xl mx-auto leading-relaxed px-2 mb-8"
+            className="text-base sm:text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed px-2 mb-8"
           >
             A showcase of my recent work, featuring modern web applications 
             built with cutting-edge technologies and thoughtful user experiences.
@@ -134,21 +133,21 @@ export default function Projects() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
           >
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-1">{projects.length}</div>
-              <div className="text-sm text-neutral-400">Projects</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">{projects.length}</div>
+              <div className="text-sm text-neutral-600">Projects</div>
             </div>
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-1">15+</div>
-              <div className="text-sm text-neutral-400">Technologies</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">15+</div>
+              <div className="text-sm text-neutral-600">Technologies</div>
             </div>
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-1">100%</div>
-              <div className="text-sm text-neutral-400">Success Rate</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">100%</div>
+              <div className="text-sm text-neutral-600">Success Rate</div>
             </div>
-            <div className="bg-neutral-800/30 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-4 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-1">3 mo</div>
-              <div className="text-sm text-neutral-400">Avg Timeline</div>
+            <div className="bg-white border border-neutral-200 rounded-xl p-4 text-center shadow-sm">
+              <div className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-1">3 mo</div>
+              <div className="text-sm text-neutral-600">Avg Timeline</div>
             </div>
           </motion.div>
         </motion.div>
@@ -166,10 +165,10 @@ export default function Projects() {
               onClick={() => setSelectedCategory(category)}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-sm text-sm sm:text-base touch-manipulation ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base touch-manipulation ${
                 selectedCategory === category
-                  ? 'bg-blue-500 text-white border border-blue-400'
-                  : 'bg-neutral-800/50 text-neutral-300 border border-neutral-700/50 hover:border-blue-400/50 hover:text-blue-400 active:bg-neutral-700/50'
+                  ? 'bg-neutral-900 text-white border border-neutral-900'
+                  : 'bg-white text-neutral-700 border border-neutral-300 hover:border-neutral-900 hover:text-neutral-900'
               }`}
             >
               {category}
@@ -196,36 +195,36 @@ export default function Projects() {
               >
                 {/* Project Card */}
                 <motion.div
-                  className="relative h-full bg-neutral-800/50 backdrop-blur-sm border border-neutral-700/50 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer touch-manipulation"
+                  className="relative h-full bg-white border border-neutral-200 rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer touch-manipulation shadow-sm"
                   whileHover={{ 
                     y: -8,
-                    rotateY: 2,
-                    rotateX: 2,
                     transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
                   whileTap={{ scale: 0.98 }}
                   style={{
-                    transformStyle: "preserve-3d",
                     boxShadow: hoveredProject === i 
-                      ? "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(59, 130, 246, 0.2)"
-                      : "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+                      ? "0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(184, 129, 74, 0.2)"
+                      : "0 1px 3px 0 rgba(0, 0, 0, 0.1)"
                   }}
                   onClick={() => setSelectedProject(project)}
                 >
-                  {/* Gradient Header */}
+                  {/* Minimal Header with Accent */}
                   <motion.div
-                    className={`h-40 sm:h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}
+                    className="h-40 sm:h-48 bg-neutral-50 relative overflow-hidden border-b border-neutral-200"
                     initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.4 }}
                   >
+                    {/* Driftwood Accent Line */}
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-[#b8814a]" />
+                    
                     {/* Live Demo Badge */}
                     {project.isLiveDemo && (
                       <motion.div
                         initial={{ scale: 0, rotate: -12 }}
                         animate={{ scale: 1, rotate: -12 }}
                         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                        className="absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full backdrop-blur-sm border border-green-400/50 flex items-center gap-1"
+                        className="absolute top-3 sm:top-4 left-3 sm:left-4 px-2 sm:px-3 py-1 bg-[#b8814a] text-white text-xs font-bold rounded-full flex items-center gap-1"
                       >
                         <FaPlay className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         <span className="hidden sm:inline">LIVE DEMO</span>
@@ -235,35 +234,26 @@ export default function Projects() {
                     
                     {/* Category Badge */}
                     <motion.div
-                      className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2 sm:px-3 py-1 bg-black/20 text-white text-xs font-medium rounded-full backdrop-blur-sm"
+                      className="absolute top-3 sm:top-4 right-3 sm:right-4 px-2 sm:px-3 py-1 bg-white border border-neutral-200 text-neutral-700 text-xs font-medium rounded-full"
                     >
                       {project.category}
                     </motion.div>
                     
-                    {/* Animated Pattern */}
+                    {/* Minimal Pattern */}
                     <motion.div
-                      className="absolute inset-0 opacity-30"
+                      className="absolute inset-0 opacity-[0.03]"
                       style={{
-                        backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 1px, transparent 1px)`,
+                        backgroundImage: `radial-gradient(circle at 25% 25%, rgba(0,0,0,0.3) 1px, transparent 1px)`,
                         backgroundSize: "20px 20px"
-                      }}
-                      animate={{
-                        backgroundPosition: ["0px 0px", "20px 20px"]
-                      }}
-                      transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: "linear"
                       }}
                     />
                     
-                    {/* 3D Floating Elements */}
+                    {/* Center Icon Placeholder */}
                     <motion.div
-                      className="absolute top-1/2 left-1/2 w-16 h-16 bg-white/10 rounded-3xl backdrop-blur-sm"
+                      className="absolute top-1/2 left-1/2 w-16 h-16 bg-white/50 border border-neutral-200 rounded-2xl"
                       style={{ translateX: "-50%", translateY: "-50%" }}
                       animate={{
-                        rotateX: hoveredProject === i ? [0, 360] : 0,
-                        rotateY: hoveredProject === i ? [0, 360] : 0,
+                        rotate: hoveredProject === i ? [0, 360] : 0,
                       }}
                       transition={{ duration: 2, ease: "easeInOut" }}
                     />
@@ -272,16 +262,16 @@ export default function Projects() {
                   {/* Content */}
                   <div className="p-4 sm:p-6 lg:p-8">
                     <motion.h4
-                      className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-white group-hover:text-blue-400 transition-colors duration-300"
+                      className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 text-neutral-900 group-hover:text-[#b8814a] transition-colors duration-300"
                       layoutId={`title-${project.id}`}
                     >
                       {project.title}
                     </motion.h4>
                     
                     <motion.p
-                      className="text-neutral-400 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6"
+                      className="text-neutral-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6"
                       animate={{ 
-                        color: hoveredProject === i ? "#e5e7eb" : "#a3a3a3" 
+                        color: hoveredProject === i ? "#404040" : "#525252" 
                       }}
                       transition={{ duration: 0.3 }}
                     >
@@ -298,12 +288,12 @@ export default function Projects() {
                             initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.1 * techIndex, duration: 0.3 }}
-                            className="flex items-center gap-1 px-2 sm:px-3 py-1 bg-neutral-700/50 border border-neutral-600/50 rounded-full text-xs font-medium text-neutral-300 backdrop-blur-sm"
+                            className="flex items-center gap-1 px-2 sm:px-3 py-1 bg-neutral-50 border border-neutral-200 rounded-full text-xs font-medium text-neutral-700"
                             whileHover={{ 
                               scale: 1.02,
-                              backgroundColor: "rgba(59, 130, 246, 0.1)",
-                              borderColor: "rgba(59, 130, 246, 0.3)",
-                              color: "#60a5fa"
+                              backgroundColor: "#f5f5f5",
+                              borderColor: "#b8814a",
+                              color: "#b8814a"
                             }}
                           >
                             {IconComponent && <IconComponent className="w-2.5 h-2.5 sm:w-3 sm:h-3" />}
@@ -323,7 +313,7 @@ export default function Projects() {
                         }}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="flex-1 py-2.5 sm:py-3 bg-blue-500/10 border border-blue-500/20 rounded-lg sm:rounded-xl text-blue-400 font-medium hover:bg-blue-500/20 transition-colors backdrop-blur-sm text-center flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base touch-manipulation"
+                        className="flex-1 py-2.5 sm:py-3 bg-neutral-900 border border-neutral-900 rounded-lg sm:rounded-xl text-white font-medium hover:bg-neutral-800 transition-colors text-center flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base touch-manipulation"
                       >
                         <FaExternalLinkAlt className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         <span className="hidden sm:inline">View Details</span>
@@ -338,7 +328,7 @@ export default function Projects() {
                         }}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="flex-1 py-2.5 sm:py-3 bg-neutral-700/50 border border-neutral-600/50 rounded-lg sm:rounded-xl text-neutral-300 font-medium hover:bg-neutral-600/50 transition-colors backdrop-blur-sm flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base touch-manipulation"
+                        className="flex-1 py-2.5 sm:py-3 bg-white border border-neutral-300 rounded-lg sm:rounded-xl text-neutral-700 font-medium hover:border-neutral-900 hover:text-neutral-900 transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-sm sm:text-base touch-manipulation"
                       >
                         <FaGithub className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         Code
@@ -346,7 +336,7 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Hover Glow Effect */}
+                  {/* Hover Border Effect */}
                   <motion.div
                     className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
