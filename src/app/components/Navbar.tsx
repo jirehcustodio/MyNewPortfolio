@@ -94,7 +94,7 @@ export default function Navbar() {
                 transition={{ delay: 0.2 + (index * 0.1), duration: 0.6 }}
                 className={`relative px-4 py-2 rounded-lg text-sm lg:text-base font-medium transition-all duration-300 ${
                   activeSection === item.href.slice(1)
-                    ? "text-neutral-900"
+                    ? "text-neutral-900 font-semibold"
                     : "text-neutral-600 hover:text-neutral-900"
                 }`}
                 whileHover={{ 
@@ -103,17 +103,17 @@ export default function Navbar() {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {item.name}
-                
                 {/* Active indicator */}
                 {activeSection === item.href.slice(1) && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute inset-0 bg-neutral-100 border border-neutral-200 rounded-lg"
+                    className="absolute inset-0 bg-neutral-100 border border-neutral-300 rounded-lg -z-10"
                     initial={false}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
+                
+                <span className="relative z-10">{item.name}</span>
               </motion.a>
             ))}
 
