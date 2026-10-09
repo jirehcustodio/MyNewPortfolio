@@ -1,18 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@300..600&display=swap");
 @import "tailwindcss";
 
 html {
   scroll-behavior: smooth;
+  background: #ffffff;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --muted: #5d5d5d;
+  --panel: rgba(255, 255, 255, 0.56);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  font-feature-settings: "ss01" 1, "cv11" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.pixel-type {
+  font-family: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+  font-feature-settings: normal;
+  letter-spacing: -0.06em;
+}
+
+::selection {
+  background: rgba(17, 17, 17, 0.15);
 }
 
 /* Improved touch targets for mobile */
@@ -31,6 +64,6 @@ body {
   }
   
   * {
-    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.1);
+    -webkit-tap-highlight-color: rgba(17, 17, 17, 0.08);
   }
 }

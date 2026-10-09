@@ -1,313 +1,97 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { 
-  SiJavascript, 
-  SiTypescript, 
-  SiReact, 
-  SiNextdotjs, 
-  SiTailwindcss, 
-  SiFramer,
-  SiNodedotjs,
-  SiPython,
-  SiHtml5,
-  SiMysql,
-  SiMongodb,
-  SiFigma,
-  SiCisco,
-  SiCloudflare
-} from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
-
-const skills = [
-  { name: "JavaScript", level: 90, color: "from-yellow-400 to-yellow-600", icon: SiJavascript },
-  { name: "TypeScript", level: 85, color: "from-blue-500 to-blue-700", icon: SiTypescript },
-  { name: "React", level: 85, color: "from-blue-400 to-blue-600", icon: SiReact },
-  { name: "Next.js", level: 88, color: "from-gray-400 to-gray-600", icon: SiNextdotjs },
-  { name: "Tailwind CSS", level: 90, color: "from-cyan-400 to-cyan-600", icon: SiTailwindcss },
-  { name: "Framer Motion", level: 80, color: "from-purple-400 to-purple-600", icon: SiFramer },
-  { name: "Node.js", level: 80, color: "from-green-400 to-green-600", icon: SiNodedotjs },
-  { name: "Python", level: 85, color: "from-blue-500 to-blue-700", icon: SiPython },
-  { name: "HTML/CSS", level: 95, color: "from-orange-400 to-orange-600", icon: SiHtml5 },
-  { name: "Java", level: 80, color: "from-red-400 to-red-600", icon: FaJava },
-  { name: "MySQL", level: 80, color: "from-blue-400 to-blue-600", icon: SiMysql },
-  { name: "MongoDB", level: 75, color: "from-green-500 to-green-700", icon: SiMongodb },
-  { name: "Figma", level: 85, color: "from-purple-500 to-pink-500", icon: SiFigma },
-  { name: "Cisco Networking", level: 80, color: "from-blue-500 to-indigo-600", icon: SiCisco },
-  { name: "Cloud Computing", level: 80, color: "from-cyan-400 to-cyan-600", icon: SiCloudflare }
-];
-
 const experiences = [
   { company: "LGU Naga - MyNaga App", role: "IT Support", duration: "2025 (Jan - Dec)" },
   { company: "BESO COSH", role: "Safety Officer 2", duration: "2024 - 2025" },
   { company: "LGU Naga City", role: "IT Support Engineer", duration: "2024" },
   { company: "Shot Studio", role: "Production Assistant Intern", duration: "2024 - 2025" },
-  { company: "Self-employed", role: "Freelance Web Developer & Multimedia Specialist", duration: "2020 - Present" }
+  {
+    company: "Self-employed",
+    role: "Freelance Web Developer & Multimedia Specialist",
+    duration: "2020 - Present",
+  },
 ];
 
 export default function About() {
-  const ref = useRef(null);
-  const skillsRef = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const isSkillsInView = useInView(skillsRef, { once: true, margin: "-100px" });
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
-
   return (
-    <section id="about" className="relative py-20 lg:py-32 overflow-hidden bg-neutral-50">
-      {/* Minimal Background */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      </div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 lg:mb-20"
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : { scale: 0 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-[#b8814a]/30 rounded-full text-neutral-700 text-sm font-medium mb-6"
-          >
-            <span className="w-2 h-2 bg-[#b8814a] rounded-full animate-pulse" />
-            About Me
-          </motion.div>
-          
-          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-neutral-900">
+    <section id="about" className="bg-neutral-50 py-16 sm:py-20 lg:py-28">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="mb-10 border-b border-black/10 pb-7">
+          <p className="pixel-type text-sm text-neutral-500">01 / about</p>
+          <h2 className="pixel-type mt-3 text-3xl text-neutral-900 sm:text-4xl">
             My Story
-          </h3>
-        </motion.div>
+          </h2>
+        </header>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Column - Story & Experience */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-8"
-          >
-            {/* Story */}
-            <div className="space-y-6">
-              <p className="text-neutral-700 text-lg lg:text-xl leading-relaxed">
-                Hello! I&apos;m <span className="text-neutral-900 font-semibold">Jireh Custodio</span>, 
-                a detail-oriented Computer Engineering graduate from Naga City, Philippines, with expertise 
-                spanning cloud computing, cybersecurity, web development, and multimedia production.
-              </p>
-              
-              <p className="text-neutral-600 text-base lg:text-lg leading-relaxed">
-                My professional journey includes serving as an IT Support Engineer at LGU Naga City, 
-                where I supported cloud-based system deployments and maintained secure public digital 
-                infrastructure. As a certified Cloud System Analyst and Safety Officer, I bring a unique 
-                blend of technical depth and safety management expertise.
-              </p>
-
-              <p className="text-neutral-600 text-base lg:text-lg leading-relaxed">
-                For over 3 years as a freelance developer and multimedia specialist, I&apos;ve helped 
-                creatives and small businesses build compelling websites and multimedia solutions. 
-                I thrive in fast-paced, innovation-driven environments where technology meets creativity.
-              </p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="flex flex-wrap gap-4"
-              >
-                {["Cloud Systems Analyst", "Safety Officer", "Multimedia Specialist", "Network Security"].map((trait, index) => (
-                  <motion.span
-                    key={trait}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                    transition={{ delay: 0.8 + (index * 0.1), duration: 0.3 }}
-                    className="px-4 py-2 bg-white border border-neutral-200 rounded-full text-neutral-700 text-sm font-medium"
-                    whileHover={{ 
-                      scale: 1.05,
-                      backgroundColor: "rgba(0, 0, 0, 0.04)",
-                      borderColor: "rgba(0, 0, 0, 0.2)"
-                    }}
+        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <p className="text-lg leading-relaxed text-neutral-700">
+              Hi, I&apos;m <span className="font-semibold text-neutral-900">Jireh Custodio</span>,
+              an <span className="font-semibold text-neutral-900">IT Lead</span> and Computer
+              Engineering graduate based in Naga City, Philippines, specializing in cloud
+              infrastructure, cybersecurity, and full-stack web development, with a background in
+              multimedia production.
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-neutral-600">
+              I lead IT operations and drive the deployment, security, and reliability of
+              cloud-based systems that support public-sector digital services. I started out as an{" "}
+              <span className="font-medium text-neutral-900">IT Support Engineer at LGU Naga City</span>,
+              where I supported cloud system rollouts and helped keep critical infrastructure
+              secure and available. That hands-on foundation shapes how I lead today: prioritizing
+              uptime, risk management, and clear technical standards. I&apos;m a certified{" "}
+              <span className="font-medium text-neutral-900">Cloud System Analyst</span> and{" "}
+              <span className="font-medium text-neutral-900">Safety Officer</span>, pairing
+              technical depth with compliance and safety discipline.
+            </p>
+            <p className="mt-5 text-base leading-relaxed text-neutral-600">
+              For 3+ years as a freelance developer and multimedia specialist, I&apos;ve designed
+              and shipped responsive websites and digital products for creatives and small
+              businesses, covering front-end builds, deployment, and visual content.
+            </p>
+            <div className="mt-6">
+              <h3 className="mb-3 text-sm font-semibold text-neutral-900">
+                Core stack &amp; focus areas
+              </h3>
+              <ul className="flex flex-wrap gap-2">
+                {[
+                  "IT Leadership",
+                  "Cloud Computing",
+                  "Cybersecurity",
+                  "Web Development",
+                  "Systems Administration",
+                  "Multimedia Production",
+                ].map((area) => (
+                  <li
+                    key={area}
+                    className="rounded-full border border-black/10 bg-white px-3 py-2 text-sm text-neutral-700"
                   >
-                    {trait}
-                  </motion.span>
+                    {area}
+                  </li>
                 ))}
-              </motion.div>
+              </ul>
             </div>
+          </div>
 
-            {/* Experience Timeline */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="space-y-6"
-            >
-              <h4 className="text-2xl font-bold text-neutral-900 mb-6">Experience</h4>
-              
-              <div className="space-y-4">
-                {experiences.map((exp, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                    transition={{ delay: 1 + (index * 0.1), duration: 0.5 }}
-                    className="group relative pl-8 border-l-2 border-neutral-200 hover:border-neutral-900 transition-colors duration-300"
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.div
-                      className="absolute -left-2 top-2 w-4 h-4 bg-neutral-900 rounded-full"
-                      whileHover={{ scale: 1.3 }}
-                      transition={{ type: "spring", stiffness: 400 }}
-                    />
-                    <div className="pb-4">
-                      <h5 className="text-lg font-semibold text-neutral-900 transition-colors">
-                        {exp.role}
-                      </h5>
-                      <p className="text-neutral-700 font-medium">{exp.company}</p>
-                      <p className="text-neutral-500 text-sm">{exp.duration}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column - Skills */}
-          <motion.div
-            ref={skillsRef}
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
-          >
-            <h4 className="text-2xl font-bold text-neutral-900">Technical Skills</h4>
-            
-            <div className="grid gap-4">
-              {skills.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isSkillsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ delay: 0.2 + (index * 0.1), duration: 0.5 }}
-                  className="group relative"
-                  onHoverStart={() => setHoveredSkill(index)}
-                  onHoverEnd={() => setHoveredSkill(null)}
+          <div id="experience" className="scroll-mt-24">
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <h3 className="pixel-type text-2xl text-neutral-900">Experience</h3>
+              <span className="font-mono text-xs text-neutral-500">
+                {String(experiences.length).padStart(2, "0")} roles
+              </span>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {experiences.map((experience) => (
+                <article
+                  key={`${experience.company}-${experience.role}`}
+                  className="rounded-2xl border border-black/10 bg-white p-5"
                 >
-                  {/* Skill Item */}
-                  <motion.div
-                    className="relative p-4 bg-white border border-neutral-200 rounded-xl overflow-hidden"
-                    whileHover={{ 
-                      scale: 1.02,
-                      borderColor: "rgba(0, 0, 0, 0.3)"
-                    }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {/* Header */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <motion.span
-                          className="text-xl text-neutral-700"
-                          animate={{ 
-                            rotate: hoveredSkill === index ? [0, -10, 10, -10, 0] : 0 
-                          }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <skill.icon className="w-5 h-5" />
-                        </motion.span>
-                        <span className="font-semibold text-neutral-900">{skill.name}</span>
-                      </div>
-                      <motion.span
-                        className="text-sm font-bold text-neutral-900"
-                        animate={{ 
-                          scale: hoveredSkill === index ? 1.1 : 1 
-                        }}
-                      >
-                        {skill.level}%
-                      </motion.span>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="relative h-2 bg-neutral-100 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-neutral-900 rounded-full relative"
-                        initial={{ width: 0 }}
-                        animate={isSkillsInView ? { width: `${skill.level}%` } : { width: 0 }}
-                        transition={{ 
-                          delay: 0.5 + (index * 0.1), 
-                          duration: 1,
-                          ease: "easeOut"
-                        }}
-                      >
-                        {/* Shimmer Effect */}
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                          animate={{ x: ["-100%", "100%"] }}
-                          transition={{ 
-                            duration: 2, 
-                            repeat: Infinity, 
-                            ease: "linear",
-                            delay: 1 + (index * 0.1)
-                          }}
-                        />
-                      </motion.div>
-                    </div>
-
-                    {/* Hover Glow */}
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20"
-                      style={{
-                        background: `linear-gradient(45deg, transparent, rgba(59, 130, 246, 0.3), transparent)`
-                      }}
-                      animate={{ 
-                        opacity: hoveredSkill === index ? 0.2 : 0 
-                      }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </motion.div>
-                </motion.div>
+                  <p className="font-mono text-xs text-neutral-500">{experience.duration}</p>
+                  <h4 className="mt-3 font-medium leading-snug text-neutral-900">
+                    {experience.role}
+                  </h4>
+                  <p className="mt-2 text-sm text-neutral-600">{experience.company}</p>
+                </article>
               ))}
             </div>
-
-            {/* Download Resume Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isSkillsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 1.5, duration: 0.6 }}
-              className="pt-6"
-            >
-              <motion.a
-                href="/resume.pdf"
-                download="Jireh_Custodio_Resume.pdf"
-                onClick={() => {
-                  // Track resume download in analytics
-                  if (typeof window !== 'undefined' && window.gtag) {
-                    window.gtag('event', 'download_resume', {
-                      event_category: 'engagement',
-                      event_label: 'Resume Download'
-                    });
-                  }
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 30px rgba(184, 129, 74, 0.3)"
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full group px-6 py-4 bg-[#b8814a] hover:bg-[#a07241] rounded-2xl font-semibold text-white relative overflow-hidden flex items-center justify-center cursor-pointer transition-colors"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  📄 Download Resume
-                  <motion.span
-                    animate={{ y: [0, -2, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    ↓
-                  </motion.span>
-                </span>
-              </motion.a>
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

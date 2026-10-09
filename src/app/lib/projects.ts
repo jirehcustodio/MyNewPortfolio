@@ -11,7 +11,7 @@ export interface ProjectData {
   githubLink: string;
   isLiveDemo: boolean;
   demoUrl?: string;
-  image: string;
+  image?: string;
   features: string[];
   challenges: string;
   solution: string;
@@ -38,7 +38,7 @@ export const projects: ProjectData[] = [
   { 
     id: 1,
     title: "MyNaga CRUD App", 
-    desc: "Comprehensive CRUD application for managing municipal data and records with advanced filtering and data management capabilities.",
+    desc: "A record-management tool for MyNaga with searchable listings and create, edit, and delete workflows.",
     longDesc: "A full-featured CRUD (Create, Read, Update, Delete) application built for LGU Naga City's MyNaga platform. This application handles municipal data management with robust features for data entry, retrieval, updating, and deletion. Designed with user-friendly interfaces and efficient data handling for government operations.",
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "API Integration", "Form Validation"],
     category: "Web App",
@@ -47,7 +47,6 @@ export const projects: ProjectData[] = [
     githubLink: "https://github.com/jirehcustodio/mynaga-crud-app",
     isLiveDemo: true,
     demoUrl: "https://mynaga-crud-app.vercel.app/",
-    image: "/projects/mynaga-crud-preview.jpg",
     features: [
       "Complete CRUD Operations", 
       "Data Validation & Error Handling", 
@@ -99,7 +98,7 @@ export const projects: ProjectData[] = [
   { 
     id: 2,
     title: "MyNaga CENRO System", 
-    desc: "Environmental and Natural Resources Office management system for tracking permits, applications, and environmental compliance.",
+    desc: "Permit and application tracking for Naga City's City Environment and Natural Resources Office.",
     longDesc: "A specialized system built for LGU Naga's City Environment and Natural Resources Office (CENRO). This comprehensive platform manages environmental permits, applications, compliance tracking, and natural resource management with features tailored for environmental governance and monitoring.",
     tech: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Database Integration", "Document Management"],
     category: "Web App",
@@ -108,7 +107,6 @@ export const projects: ProjectData[] = [
     githubLink: "https://github.com/jirehcustodio/mynaga-crud-app",
     isLiveDemo: true,
     demoUrl: "https://mynaga-crud-app.vercel.app/cenro",
-    image: "/projects/cenro-preview.jpg",
     features: [
       "Permit Application Management", 
       "Environmental Compliance Tracking", 
@@ -160,7 +158,7 @@ export const projects: ProjectData[] = [
   { 
     id: 3,
     title: "WAM Dashboard", 
-    desc: "Web Analytics & Monitoring dashboard for tracking website performance, user behavior, and comprehensive site metrics.",
+    desc: "A dashboard for monitoring web activity and reviewing site performance metrics.",
     longDesc: "A professional analytics and monitoring dashboard designed to provide comprehensive insights into website performance, user behavior, and site metrics. Features real-time data visualization, custom KPI tracking, and detailed reporting tools for data-driven decision making.",
     tech: ["Next.js", "TypeScript", "Chart.js", "Tailwind CSS", "Analytics Integration", "Real-time Data"],
     category: "Dashboard",
@@ -169,7 +167,6 @@ export const projects: ProjectData[] = [
     githubLink: "https://github.com/jirehcustodio/wam-dashboard",
     isLiveDemo: true,
     demoUrl: "https://wamdashboard.netlify.app/",
-    image: "/projects/wam-preview.jpg",
     features: [
       "Real-time Analytics Tracking", 
       "Interactive Data Visualizations", 
@@ -221,7 +218,7 @@ export const projects: ProjectData[] = [
   {
     id: 4,
     title: "Portfolio Website", 
-    desc: "Modern, responsive portfolio website with advanced animations, real-time testimonials, and comprehensive blog system.",
+    desc: "A personal site bringing together selected projects, technical writing, and direct contact.",
     longDesc: "A cutting-edge portfolio website showcasing modern web development practices. Features include advanced animations, real-time testimonial system, comprehensive blog with technical articles, contact form integration, and optimized performance across all devices.",
     tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Framer Motion", "Supabase", "FormSubmit", "Web Audio API"],
     category: "Portfolio",
@@ -230,7 +227,6 @@ export const projects: ProjectData[] = [
     githubLink: "https://github.com/jirehcustodio/MyNewPortfolio",
     isLiveDemo: true,
     demoUrl: "/",
-    image: "/projects/portfolio-preview.jpg",
     features: [
       "Advanced Framer Motion Animations", 
       "Real-time Testimonial System", 
