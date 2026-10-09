@@ -62,7 +62,7 @@ export default function LiveTestimonials() {
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-neutral-50">
+      <section id="recommendations" className="py-16 bg-neutral-50">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="animate-pulse">
@@ -76,7 +76,7 @@ export default function LiveTestimonials() {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+    <section id="recommendations" className="py-16 lg:py-24 bg-white relative overflow-hidden">
       {/* Minimal Background */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="h-full w-full bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
